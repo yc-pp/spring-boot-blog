@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.User">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="passWord" jdbcType="VARCHAR" property="password" />
+    <result column="userURL" jdbcType="VARCHAR" property="userurl" />
+    <result column="userRole" jdbcType="VARCHAR" property="userrole" />
+    <result column="userAvatar" jdbcType="VARCHAR" property="useravatar" />
+    <result column="userGitHubId" jdbcType="VARCHAR" property="usergithubid" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, userName, nickName, `passWord`, userURL, userRole, userAvatar, userGitHubId, 
+    createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_user
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_user
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.User">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_user (userName, nickName, `passWord`, 
+      userURL, userRole, userAvatar, 
+      userGitHubId, createDate)
+    values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userurl,jdbcType=VARCHAR}, #{userrole,jdbcType=VARCHAR}, #{useravatar,jdbcType=VARCHAR}, 
+      #{usergithubid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.User">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="nickname != null">
+        nickName,
+      </if>
+      <if test="password != null">
+        `passWord`,
+      </if>
+      <if test="userurl != null">
+        userURL,
+      </if>
+      <if test="userrole != null">
+        userRole,
+      </if>
+      <if test="useravatar != null">
+        userAvatar,
+      </if>
+      <if test="usergithubid != null">
+        userGitHubId,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userurl != null">
+        #{userurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userrole != null">
+        #{userrole,jdbcType=VARCHAR},
+      </if>
+      <if test="useravatar != null">
+        #{useravatar,jdbcType=VARCHAR},
+      </if>
+      <if test="usergithubid != null">
+        #{usergithubid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.User">
+    update yc_user
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `passWord` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userurl != null">
+        userURL = #{userurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userrole != null">
+        userRole = #{userrole,jdbcType=VARCHAR},
+      </if>
+      <if test="useravatar != null">
+        userAvatar = #{useravatar,jdbcType=VARCHAR},
+      </if>
+      <if test="usergithubid != null">
+        userGitHubId = #{usergithubid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.User">
+    update yc_user
+    set userName = #{username,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      `passWord` = #{password,jdbcType=VARCHAR},
+      userURL = #{userurl,jdbcType=VARCHAR},
+      userRole = #{userrole,jdbcType=VARCHAR},
+      userAvatar = #{useravatar,jdbcType=VARCHAR},
+      userGitHubId = #{usergithubid,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+
+  <select id="login" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from yc_user
+    where userName = #{userName,jdbcType=VARCHAR} AND passWord=#{passWord,jdbcType=VARCHAR}
+  </select>
+</mapper>

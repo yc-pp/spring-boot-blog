@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Category">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="categoryTitle" jdbcType="VARCHAR" property="categorytitle" />
+    <result column="categoryURI" jdbcType="VARCHAR" property="categoryuri" />
+    <result column="categoryDescription" jdbcType="VARCHAR" property="categorydescription" />
+    <result column="categoryOrder" jdbcType="VARCHAR" property="categoryorder" />
+    <result column="categoryTagCnt" jdbcType="VARCHAR" property="categorytagcnt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, categoryTitle, categoryURI, categoryDescription, categoryOrder, categoryTagCnt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_category
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_category
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Category">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_category (categoryTitle, categoryURI, categoryDescription, 
+      categoryOrder, categoryTagCnt)
+    values (#{categorytitle,jdbcType=VARCHAR}, #{categoryuri,jdbcType=VARCHAR}, #{categorydescription,jdbcType=VARCHAR}, 
+      #{categoryorder,jdbcType=VARCHAR}, #{categorytagcnt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Category">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categorytitle != null">
+        categoryTitle,
+      </if>
+      <if test="categoryuri != null">
+        categoryURI,
+      </if>
+      <if test="categorydescription != null">
+        categoryDescription,
+      </if>
+      <if test="categoryorder != null">
+        categoryOrder,
+      </if>
+      <if test="categorytagcnt != null">
+        categoryTagCnt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categorytitle != null">
+        #{categorytitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryuri != null">
+        #{categoryuri,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydescription != null">
+        #{categorydescription,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryorder != null">
+        #{categoryorder,jdbcType=VARCHAR},
+      </if>
+      <if test="categorytagcnt != null">
+        #{categorytagcnt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Category">
+    update yc_category
+    <set>
+      <if test="categorytitle != null">
+        categoryTitle = #{categorytitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryuri != null">
+        categoryURI = #{categoryuri,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydescription != null">
+        categoryDescription = #{categorydescription,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryorder != null">
+        categoryOrder = #{categoryorder,jdbcType=VARCHAR},
+      </if>
+      <if test="categorytagcnt != null">
+        categoryTagCnt = #{categorytagcnt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Category">
+    update yc_category
+    set categoryTitle = #{categorytitle,jdbcType=VARCHAR},
+      categoryURI = #{categoryuri,jdbcType=VARCHAR},
+      categoryDescription = #{categorydescription,jdbcType=VARCHAR},
+      categoryOrder = #{categoryorder,jdbcType=VARCHAR},
+      categoryTagCnt = #{categorytagcnt,jdbcType=VARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

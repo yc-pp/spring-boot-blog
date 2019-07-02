@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--公共head区域-->
+<head th:fragment="common-head">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>YC blog 博客管理系統</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <!-- Styles -->
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap-responsive.min.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/fontawesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/jQueryUI/css/jquery-ui-1.10.0.custom.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/css/styles.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap-table.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/sweetalert/css/sweetalert.css}">
+</head>
+<!--公共nav区域-->
+<div class="navbar navbar-static-top" th:fragment="common-nav">
+    <div class="navbar-inner">
+        <a class="brand" th:href="@{/admin/index}">YcBlog</a>
+        <ul class="nav">
+            <li id="menu-icon"><a class="menu-icon" href="#"><i class="icon-reorder"></i></a></li>
+            <li class="dropdown">
+                <a  class="dropdown-toggle menu-icon" data-toggle="dropdown" href="#"><i class="icon-user"></i></a>
+                <ul class="user dropdown-menu">
+                    <li>
+                        <div class="container-fluid">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <img class="profile" th:src="@{~/static/admin/assets/img/flat_icons/person.png}" alt="">
+                                </div>
+                                <div class="span8 details">
+                                    <small>Welcome to YcBlog!</small>
+                                    <ul class="unstyled">
+                                        <li><a href="#"><small>姓名：YC</small></a></li>
+                                        <li><a href="#"><small>职称：Java开发工程师</small></a></li>
+                                        <li><a href="#"><small>邮箱：908665908@qq.com</small></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav pull-right search">
+            <form class="nav-search" action="">
+                <input type="text">
+            </form>
+        </ul>
+    </div>
+</div>
+<!--公共menu区域-->
+<ul class="menu" th:fragment="common-menu">
+    <li>
+        <a th:href="@{/admin/index}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/dashboard.png}" alt="" />首页</span></a>
+    </li>
+    <li>
+        <a th:href="@{/admin/blog/edit}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />写博客</span></a>
+    </li>
+    <li>
+        <a th:href="@{/admin/blog/list}"><span><img class="img-icon"  th:src="@{~/static/admin/assets/img/flat_icons/layered.png}"alt="" />博客管理</span></a>
+    </li>
+    <li><a th:href="@{/admin/comment/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />评论管理</span></a></li>
+    <li><a th:href="@{/admin/category/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />分类管理</span></a></li>
+    <li><a th:href="@{/admin/tag}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/calendar.png}" alt="" />标签管理</span></a></li>
+    <li><a th:href="@{/admin/link/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />友情链接</span></a></li>
+    <li>
+        <span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/sheild.png}" alt="" />系统管理<i class="icon-angle-down"></i></span>
+        <ul>
+            <li><a th:href="@{/admin/config}">系统配置</a></li>
+            <li><a th:href="@{/admin/changePwd}">密码修改</a></li>
+            <li><a th:href="@{/admin/logout}">安全退出</a></li>
+        </ul>
+    </li>
+</ul>
+<!--公共bread区域-->
+<div class="breadcrumb" th:fragment="common-bread">
+    <a class="btn orange" th:href="@{/admin/index}"><i class="icon-refresh"></i></a> <a class="btn" th:href="@{/admin/index}">Elements</a>
+    <div class="pull-right">
+        <a class="btn btn-info" href="#"><i class="icon-calendar"></i></a> <a class="btn" href="#">13/08/13</a>
+    </div>
+</div>
+<!--公共foot区域-->
+<div class="container-fluid footer" th:fragment="common-foot">
+    <div class="row-fluid">
+        <div class="span12">
+            <p class="pull-right"><strong>Copyright &copy; 2019 <a href="##">yc-blog.top</a>.</strong>
+                All rights reserved.</p>
+        </div>
+    </div>
+</div>
+</html>

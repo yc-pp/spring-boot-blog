@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.ArchivedateArticleMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.ArchivedateArticle">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="archiveDate_oId" jdbcType="BIGINT" property="archivedateOid" />
+    <result column="article_oId" jdbcType="BIGINT" property="articleOid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, archiveDate_oId, article_oId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_archivedate_article
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_archivedate_article
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.ArchivedateArticle">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_archivedate_article (archiveDate_oId, article_oId)
+    values (#{archivedateOid,jdbcType=BIGINT}, #{articleOid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.ArchivedateArticle">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_archivedate_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="archivedateOid != null">
+        archiveDate_oId,
+      </if>
+      <if test="articleOid != null">
+        article_oId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="archivedateOid != null">
+        #{archivedateOid,jdbcType=BIGINT},
+      </if>
+      <if test="articleOid != null">
+        #{articleOid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.ArchivedateArticle">
+    update yc_archivedate_article
+    <set>
+      <if test="archivedateOid != null">
+        archiveDate_oId = #{archivedateOid,jdbcType=BIGINT},
+      </if>
+      <if test="articleOid != null">
+        article_oId = #{articleOid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.ArchivedateArticle">
+    update yc_archivedate_article
+    set archiveDate_oId = #{archivedateOid,jdbcType=BIGINT},
+      article_oId = #{articleOid,jdbcType=BIGINT}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

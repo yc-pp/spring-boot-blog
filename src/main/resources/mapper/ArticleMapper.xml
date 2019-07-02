@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Article">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="articleTitle" jdbcType="VARCHAR" property="articletitle" />
+    <result column="articleAbstract" jdbcType="VARCHAR" property="articleabstract" />
+    <result column="articleAbstractText" jdbcType="VARCHAR" property="articleabstracttext" />
+    <result column="articleTags" jdbcType="VARCHAR" property="articletags" />
+    <result column="articleAuthorId" jdbcType="BIGINT" property="articleauthorid" />
+    <result column="articleCommentCount" jdbcType="VARCHAR" property="articlecommentcount" />
+    <result column="articleViewCount" jdbcType="VARCHAR" property="articleviewcount" />
+    <result column="articlePermalink" jdbcType="VARCHAR" property="articlepermalink" />
+    <result column="articlePutTop" jdbcType="VARCHAR" property="articleputtop" />
+    <result column="articleCreated" jdbcType="TIMESTAMP" property="articlecreated" />
+    <result column="articleUpdated" jdbcType="TIMESTAMP" property="articleupdated" />
+    <result column="articleRandomDouble" jdbcType="DOUBLE" property="articlerandomdouble" />
+    <result column="articleSignId" jdbcType="VARCHAR" property="articlesignid" />
+    <result column="articleCommentable" jdbcType="VARCHAR" property="articlecommentable" />
+    <result column="articleViewPwd" jdbcType="VARCHAR" property="articleviewpwd" />
+    <result column="articleImg1URL" jdbcType="VARCHAR" property="articleimg1url" />
+    <result column="articleStatus" jdbcType="VARCHAR" property="articlestatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.blog.base.entity.Article">
+    <result column="articleContent" jdbcType="LONGVARCHAR" property="articlecontent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, articleTitle, articleAbstract, articleAbstractText, articleTags, articleAuthorId, 
+    articleCommentCount, articleViewCount, articlePermalink, articlePutTop, articleCreated, 
+    articleUpdated, articleRandomDouble, articleSignId, articleCommentable, articleViewPwd, 
+    articleImg1URL, articleStatus
+  </sql>
+  <sql id="Blob_Column_List">
+    articleContent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yc_article
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_article
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Article">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_article (articleTitle, articleAbstract, articleAbstractText, 
+      articleTags, articleAuthorId, articleCommentCount, 
+      articleViewCount, articlePermalink, articlePutTop, 
+      articleCreated, articleUpdated, articleRandomDouble, 
+      articleSignId, articleCommentable, articleViewPwd, 
+      articleImg1URL, articleStatus, articleContent
+      )
+    values (#{articletitle,jdbcType=VARCHAR}, #{articleabstract,jdbcType=VARCHAR}, #{articleabstracttext,jdbcType=VARCHAR}, 
+      #{articletags,jdbcType=VARCHAR}, #{articleauthorid,jdbcType=BIGINT}, #{articlecommentcount,jdbcType=VARCHAR}, 
+      #{articleviewcount,jdbcType=VARCHAR}, #{articlepermalink,jdbcType=VARCHAR}, #{articleputtop,jdbcType=VARCHAR}, 
+      #{articlecreated,jdbcType=TIMESTAMP}, #{articleupdated,jdbcType=TIMESTAMP}, #{articlerandomdouble,jdbcType=DOUBLE}, 
+      #{articlesignid,jdbcType=VARCHAR}, #{articlecommentable,jdbcType=VARCHAR}, #{articleviewpwd,jdbcType=VARCHAR}, 
+      #{articleimg1url,jdbcType=VARCHAR}, #{articlestatus,jdbcType=VARCHAR}, #{articlecontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Article">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articletitle != null">
+        articleTitle,
+      </if>
+      <if test="articleabstract != null">
+        articleAbstract,
+      </if>
+      <if test="articleabstracttext != null">
+        articleAbstractText,
+      </if>
+      <if test="articletags != null">
+        articleTags,
+      </if>
+      <if test="articleauthorid != null">
+        articleAuthorId,
+      </if>
+      <if test="articlecommentcount != null">
+        articleCommentCount,
+      </if>
+      <if test="articleviewcount != null">
+        articleViewCount,
+      </if>
+      <if test="articlepermalink != null">
+        articlePermalink,
+      </if>
+      <if test="articleputtop != null">
+        articlePutTop,
+      </if>
+      <if test="articlecreated != null">
+        articleCreated,
+      </if>
+      <if test="articleupdated != null">
+        articleUpdated,
+      </if>
+      <if test="articlerandomdouble != null">
+        articleRandomDouble,
+      </if>
+      <if test="articlesignid != null">
+        articleSignId,
+      </if>
+      <if test="articlecommentable != null">
+        articleCommentable,
+      </if>
+      <if test="articleviewpwd != null">
+        articleViewPwd,
+      </if>
+      <if test="articleimg1url != null">
+        articleImg1URL,
+      </if>
+      <if test="articlestatus != null">
+        articleStatus,
+      </if>
+      <if test="articlecontent != null">
+        articleContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articletitle != null">
+        #{articletitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleabstract != null">
+        #{articleabstract,jdbcType=VARCHAR},
+      </if>
+      <if test="articleabstracttext != null">
+        #{articleabstracttext,jdbcType=VARCHAR},
+      </if>
+      <if test="articletags != null">
+        #{articletags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleauthorid != null">
+        #{articleauthorid,jdbcType=BIGINT},
+      </if>
+      <if test="articlecommentcount != null">
+        #{articlecommentcount,jdbcType=VARCHAR},
+      </if>
+      <if test="articleviewcount != null">
+        #{articleviewcount,jdbcType=VARCHAR},
+      </if>
+      <if test="articlepermalink != null">
+        #{articlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleputtop != null">
+        #{articleputtop,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecreated != null">
+        #{articlecreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleupdated != null">
+        #{articleupdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articlerandomdouble != null">
+        #{articlerandomdouble,jdbcType=DOUBLE},
+      </if>
+      <if test="articlesignid != null">
+        #{articlesignid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentable != null">
+        #{articlecommentable,jdbcType=VARCHAR},
+      </if>
+      <if test="articleviewpwd != null">
+        #{articleviewpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="articleimg1url != null">
+        #{articleimg1url,jdbcType=VARCHAR},
+      </if>
+      <if test="articlestatus != null">
+        #{articlestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecontent != null">
+        #{articlecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Article">
+    update yc_article
+    <set>
+      <if test="articletitle != null">
+        articleTitle = #{articletitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleabstract != null">
+        articleAbstract = #{articleabstract,jdbcType=VARCHAR},
+      </if>
+      <if test="articleabstracttext != null">
+        articleAbstractText = #{articleabstracttext,jdbcType=VARCHAR},
+      </if>
+      <if test="articletags != null">
+        articleTags = #{articletags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleauthorid != null">
+        articleAuthorId = #{articleauthorid,jdbcType=BIGINT},
+      </if>
+      <if test="articlecommentcount != null">
+        articleCommentCount = #{articlecommentcount,jdbcType=VARCHAR},
+      </if>
+      <if test="articleviewcount != null">
+        articleViewCount = #{articleviewcount,jdbcType=VARCHAR},
+      </if>
+      <if test="articlepermalink != null">
+        articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleputtop != null">
+        articlePutTop = #{articleputtop,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecreated != null">
+        articleCreated = #{articlecreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleupdated != null">
+        articleUpdated = #{articleupdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articlerandomdouble != null">
+        articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      </if>
+      <if test="articlesignid != null">
+        articleSignId = #{articlesignid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentable != null">
+        articleCommentable = #{articlecommentable,jdbcType=VARCHAR},
+      </if>
+      <if test="articleviewpwd != null">
+        articleViewPwd = #{articleviewpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="articleimg1url != null">
+        articleImg1URL = #{articleimg1url,jdbcType=VARCHAR},
+      </if>
+      <if test="articlestatus != null">
+        articleStatus = #{articlestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecontent != null">
+        articleContent = #{articlecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.blog.base.entity.Article">
+    update yc_article
+    set articleTitle = #{articletitle,jdbcType=VARCHAR},
+      articleAbstract = #{articleabstract,jdbcType=VARCHAR},
+      articleAbstractText = #{articleabstracttext,jdbcType=VARCHAR},
+      articleTags = #{articletags,jdbcType=VARCHAR},
+      articleAuthorId = #{articleauthorid,jdbcType=BIGINT},
+      articleCommentCount = #{articlecommentcount,jdbcType=VARCHAR},
+      articleViewCount = #{articleviewcount,jdbcType=VARCHAR},
+      articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      articlePutTop = #{articleputtop,jdbcType=VARCHAR},
+      articleCreated = #{articlecreated,jdbcType=TIMESTAMP},
+      articleUpdated = #{articleupdated,jdbcType=TIMESTAMP},
+      articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      articleSignId = #{articlesignid,jdbcType=VARCHAR},
+      articleCommentable = #{articlecommentable,jdbcType=VARCHAR},
+      articleViewPwd = #{articleviewpwd,jdbcType=VARCHAR},
+      articleImg1URL = #{articleimg1url,jdbcType=VARCHAR},
+      articleStatus = #{articlestatus,jdbcType=VARCHAR},
+      articleContent = #{articlecontent,jdbcType=LONGVARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Article">
+    update yc_article
+    set articleTitle = #{articletitle,jdbcType=VARCHAR},
+      articleAbstract = #{articleabstract,jdbcType=VARCHAR},
+      articleAbstractText = #{articleabstracttext,jdbcType=VARCHAR},
+      articleTags = #{articletags,jdbcType=VARCHAR},
+      articleAuthorId = #{articleauthorid,jdbcType=BIGINT},
+      articleCommentCount = #{articlecommentcount,jdbcType=VARCHAR},
+      articleViewCount = #{articleviewcount,jdbcType=VARCHAR},
+      articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      articlePutTop = #{articleputtop,jdbcType=VARCHAR},
+      articleCreated = #{articlecreated,jdbcType=TIMESTAMP},
+      articleUpdated = #{articleupdated,jdbcType=TIMESTAMP},
+      articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      articleSignId = #{articlesignid,jdbcType=VARCHAR},
+      articleCommentable = #{articlecommentable,jdbcType=VARCHAR},
+      articleViewPwd = #{articleviewpwd,jdbcType=VARCHAR},
+      articleImg1URL = #{articleimg1url,jdbcType=VARCHAR},
+      articleStatus = #{articlestatus,jdbcType=VARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

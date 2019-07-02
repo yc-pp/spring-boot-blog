@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Comment">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="commentContent" jdbcType="VARCHAR" property="commentcontent" />
+    <result column="commentCreated" jdbcType="TIMESTAMP" property="commentcreated" />
+    <result column="commentName" jdbcType="VARCHAR" property="commentname" />
+    <result column="commentOnId" jdbcType="BIGINT" property="commentonid" />
+    <result column="commentSharpURL" jdbcType="VARCHAR" property="commentsharpurl" />
+    <result column="commentThumbnailURL" jdbcType="VARCHAR" property="commentthumbnailurl" />
+    <result column="commentURL" jdbcType="VARCHAR" property="commenturl" />
+    <result column="commentOriginalCommentId" jdbcType="VARCHAR" property="commentoriginalcommentid" />
+    <result column="commentOriginalCommentName" jdbcType="VARCHAR" property="commentoriginalcommentname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, commentContent, commentCreated, commentName, commentOnId, commentSharpURL, commentThumbnailURL, 
+    commentURL, commentOriginalCommentId, commentOriginalCommentName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_comment
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_comment
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Comment">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_comment (commentContent, commentCreated, 
+      commentName, commentOnId, commentSharpURL, 
+      commentThumbnailURL, commentURL, commentOriginalCommentId, 
+      commentOriginalCommentName)
+    values (#{commentcontent,jdbcType=VARCHAR}, #{commentcreated,jdbcType=TIMESTAMP}, 
+      #{commentname,jdbcType=VARCHAR}, #{commentonid,jdbcType=BIGINT}, #{commentsharpurl,jdbcType=VARCHAR}, 
+      #{commentthumbnailurl,jdbcType=VARCHAR}, #{commenturl,jdbcType=VARCHAR}, #{commentoriginalcommentid,jdbcType=VARCHAR}, 
+      #{commentoriginalcommentname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Comment">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentcontent != null">
+        commentContent,
+      </if>
+      <if test="commentcreated != null">
+        commentCreated,
+      </if>
+      <if test="commentname != null">
+        commentName,
+      </if>
+      <if test="commentonid != null">
+        commentOnId,
+      </if>
+      <if test="commentsharpurl != null">
+        commentSharpURL,
+      </if>
+      <if test="commentthumbnailurl != null">
+        commentThumbnailURL,
+      </if>
+      <if test="commenturl != null">
+        commentURL,
+      </if>
+      <if test="commentoriginalcommentid != null">
+        commentOriginalCommentId,
+      </if>
+      <if test="commentoriginalcommentname != null">
+        commentOriginalCommentName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentcontent != null">
+        #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcreated != null">
+        #{commentcreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentname != null">
+        #{commentname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentonid != null">
+        #{commentonid,jdbcType=BIGINT},
+      </if>
+      <if test="commentsharpurl != null">
+        #{commentsharpurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentthumbnailurl != null">
+        #{commentthumbnailurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commenturl != null">
+        #{commenturl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentoriginalcommentid != null">
+        #{commentoriginalcommentid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentoriginalcommentname != null">
+        #{commentoriginalcommentname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Comment">
+    update yc_comment
+    <set>
+      <if test="commentcontent != null">
+        commentContent = #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcreated != null">
+        commentCreated = #{commentcreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentname != null">
+        commentName = #{commentname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentonid != null">
+        commentOnId = #{commentonid,jdbcType=BIGINT},
+      </if>
+      <if test="commentsharpurl != null">
+        commentSharpURL = #{commentsharpurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentthumbnailurl != null">
+        commentThumbnailURL = #{commentthumbnailurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commenturl != null">
+        commentURL = #{commenturl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentoriginalcommentid != null">
+        commentOriginalCommentId = #{commentoriginalcommentid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentoriginalcommentname != null">
+        commentOriginalCommentName = #{commentoriginalcommentname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Comment">
+    update yc_comment
+    set commentContent = #{commentcontent,jdbcType=VARCHAR},
+      commentCreated = #{commentcreated,jdbcType=TIMESTAMP},
+      commentName = #{commentname,jdbcType=VARCHAR},
+      commentOnId = #{commentonid,jdbcType=BIGINT},
+      commentSharpURL = #{commentsharpurl,jdbcType=VARCHAR},
+      commentThumbnailURL = #{commentthumbnailurl,jdbcType=VARCHAR},
+      commentURL = #{commenturl,jdbcType=VARCHAR},
+      commentOriginalCommentId = #{commentoriginalcommentid,jdbcType=VARCHAR},
+      commentOriginalCommentName = #{commentoriginalcommentname,jdbcType=VARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

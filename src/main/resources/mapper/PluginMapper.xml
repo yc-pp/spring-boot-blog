@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.PluginMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Plugin">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.blog.base.entity.Plugin">
+    <result column="setting" jdbcType="LONGVARCHAR" property="setting" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, author, `name`, `status`, version
+  </sql>
+  <sql id="Blob_Column_List">
+    setting
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yc_plugin
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_plugin
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Plugin">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_plugin (author, `name`, `status`, 
+      version, setting)
+    values (#{author,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{setting,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Plugin">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_plugin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="author != null">
+        author,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="setting != null">
+        setting,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="setting != null">
+        #{setting,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Plugin">
+    update yc_plugin
+    <set>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="setting != null">
+        setting = #{setting,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.blog.base.entity.Plugin">
+    update yc_plugin
+    set author = #{author,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      setting = #{setting,jdbcType=LONGVARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Plugin">
+    update yc_plugin
+    set author = #{author,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.ArchivedateMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Archivedate">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="archiveTime" jdbcType="TIMESTAMP" property="archivetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, archiveTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_archivedate
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_archivedate
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Archivedate">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_archivedate (archiveTime)
+    values (#{archivetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Archivedate">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_archivedate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="archivetime != null">
+        archiveTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="archivetime != null">
+        #{archivetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Archivedate">
+    update yc_archivedate
+    <set>
+      <if test="archivetime != null">
+        archiveTime = #{archivetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Archivedate">
+    update yc_archivedate
+    set archiveTime = #{archivetime,jdbcType=TIMESTAMP}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>

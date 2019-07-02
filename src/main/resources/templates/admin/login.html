@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>YC blog</title>
+    <!--登录页面样式-->
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/vector/style.css}">
+</head>
+<body>
+
+<div id="container">
+    <div id="output">
+        <div class="containerT">
+            <h1>用户登录</h1>
+            <form class="form" id="entry_form" th:action="@{/admin/login}" method="post">
+                <input type="text" placeholder="请输入账号" name="userName" required="true">
+                <input type="password" placeholder="请输入密码" name="passWord" required="true">
+                <input type="text" name="verifyCode" placeholder="请输入验证码" required="true">
+                        <img alt="单击图片刷新！" style="vertical-align:top" th:src="@{/admin/common/kaptcha}"
+                             onclick="this.src='/admin/common/kaptcha?d='+new Date()*1">
+                <button type="submit" id="entry_btn">登录</button>
+                <div th:if="${not #strings.isEmpty(session.errorMsg)}" >
+                    <div style="font-size: 40px;color: #000;" th:text="${session.errorMsg}"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<!--登录页面背景图片制作js-->
+<script th:src="@{~/static/admin/plugins/vector/vector.js}"></script>
+<script type="text/javascript">
+    $(function(){
+        Victor("container", "output");   //登录背景函数
+        $("#entry_name").focus();
+    });
+</script>
+</body>
+</html>

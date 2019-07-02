@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.base.dao.LinkMapper">
+  <resultMap id="BaseResultMap" type="com.blog.base.entity.Link">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="linkAddress" jdbcType="VARCHAR" property="linkaddress" />
+    <result column="linkDescription" jdbcType="VARCHAR" property="linkdescription" />
+    <result column="linkOrder" jdbcType="VARCHAR" property="linkorder" />
+    <result column="linkTitle" jdbcType="VARCHAR" property="linktitle" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oId, linkAddress, linkDescription, linkOrder, linkTitle, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yc_link
+    where oId = #{oid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from yc_link
+    where oId = #{oid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.blog.base.entity.Link">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_link (linkAddress, linkDescription, linkOrder, 
+      linkTitle, createDate)
+    values (#{linkaddress,jdbcType=VARCHAR}, #{linkdescription,jdbcType=VARCHAR}, #{linkorder,jdbcType=VARCHAR}, 
+      #{linktitle,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.base.entity.Link">
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yc_link
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="linkaddress != null">
+        linkAddress,
+      </if>
+      <if test="linkdescription != null">
+        linkDescription,
+      </if>
+      <if test="linkorder != null">
+        linkOrder,
+      </if>
+      <if test="linktitle != null">
+        linkTitle,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="linkaddress != null">
+        #{linkaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkdescription != null">
+        #{linkdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="linkorder != null">
+        #{linkorder,jdbcType=VARCHAR},
+      </if>
+      <if test="linktitle != null">
+        #{linktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.base.entity.Link">
+    update yc_link
+    <set>
+      <if test="linkaddress != null">
+        linkAddress = #{linkaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkdescription != null">
+        linkDescription = #{linkdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="linkorder != null">
+        linkOrder = #{linkorder,jdbcType=VARCHAR},
+      </if>
+      <if test="linktitle != null">
+        linkTitle = #{linktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.base.entity.Link">
+    update yc_link
+    set linkAddress = #{linkaddress,jdbcType=VARCHAR},
+      linkDescription = #{linkdescription,jdbcType=VARCHAR},
+      linkOrder = #{linkorder,jdbcType=VARCHAR},
+      linkTitle = #{linktitle,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP}
+    where oId = #{oid,jdbcType=BIGINT}
+  </update>
+</mapper>
