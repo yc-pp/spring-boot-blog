@@ -14,6 +14,7 @@
     <link rel="stylesheet" th:href="@{~/static/admin/plugins/css/styles.css}">
     <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap-table.css}">
     <link rel="stylesheet" th:href="@{~/static/admin/plugins/sweetalert/css/sweetalert.css}">
+    <link rel="stylesheet" th:href="@{~/static/admin/plugins/css/main.css}">
 </head>
 <!--公共nav区域-->
 <div class="navbar navbar-static-top" th:fragment="common-nav">
@@ -57,15 +58,15 @@
         <a th:href="@{/admin/index}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/dashboard.png}" alt="" />首页</span></a>
     </li>
     <li>
-        <a th:href="@{/admin/blog/edit}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />写博客</span></a>
+        <a th:href="@{/admin/article/edit}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />写博客</span></a>
     </li>
     <li>
-        <a th:href="@{/admin/blog/list}"><span><img class="img-icon"  th:src="@{~/static/admin/assets/img/flat_icons/layered.png}"alt="" />博客管理</span></a>
+        <a th:href="@{/admin/article}"><span><img class="img-icon"  th:src="@{~/static/admin/assets/img/flat_icons/layered.png}"alt="" />博客管理</span></a>
     </li>
-    <li><a th:href="@{/admin/comment/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />评论管理</span></a></li>
-    <li><a th:href="@{/admin/category/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />分类管理</span></a></li>
+    <li><a th:href="@{/admin/comment}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />评论管理</span></a></li>
+    <li><a th:href="@{/admin/category}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />分类管理</span></a></li>
     <li><a th:href="@{/admin/tag}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/calendar.png}" alt="" />标签管理</span></a></li>
-    <li><a th:href="@{/admin/link/list}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />友情链接</span></a></li>
+    <li><a th:href="@{/admin/link}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />友情链接</span></a></li>
     <li>
         <span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/sheild.png}" alt="" />系统管理<i class="icon-angle-down"></i></span>
         <ul>

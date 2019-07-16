@@ -18,7 +18,7 @@
                 <div class="row-fluid">
                     <div class="span12 well">
                         <div class="title">
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">新增</button>
+                            <button class="btn btn-primary btn-lg" onclick="tagAdd()">新增</button>
                         </div>
                         <div class="well-content">
                             <table id="table_tagList" class="table table-bordered">
@@ -40,13 +40,12 @@
                     <h4 class="modal-title" id="myModalLabel">标签添加</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="linkForm">
+                    <form id="tagForm">
                         <div class="form-group">
                             <div class="alert alert-danger" id="edit-error-msg" style="display: none;">
                                 错误信息展示栏。
                             </div>
                         </div>
-                        <input type="hidden" class="form-control" id="linkId" name="linkId">
                         <div class="form-group">
                             <label for="tagTitle" class="control-label">标签名称:</label>
                             <input type="text" class="form-control" id="tagTitle" name="tagTitle"
@@ -69,6 +68,7 @@
 <script th:src="@{~/static/admin/plugins/jQueryUI/js/jquery-ui-1.9.2.custom.min.js}"></script>
 <script th:src="@{~/static/admin/plugins/sweetalert/js/sweetalert.min.js}"></script>
 <script th:src="@{~/static/admin/plugins/js/menu.js}"></script>
+<script th:src="@{~/static/admin/plugins/js/util.js}"></script>
 <script th:src="@{~/static/admin/plugins/js/tag.js}"></script>
 </body>
 </html>

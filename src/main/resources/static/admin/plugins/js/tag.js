@@ -9,8 +9,8 @@
             undefinedText: "空",//当数据为 undefined 时显示的字符
             pagination: true, //分页
             // paginationLoop:true,//设置为 true 启用分页条无限循环的功能。
-            showToggle: "false",//是否显示 切换试图（table/card）按钮
-            showColumns: "false",//是否显示 内容列下拉框
+            showToggle: false,//是否显示 切换试图（table/card）按钮
+            showColumns: false,//是否显示 内容列下拉框
             pageNumber: 1,//如果设置了分页，首页页码
             // showPaginationSwitch:true,//是否显示 数据条数选择框
             pageSize: 5,//如果设置了分页，页面数据条数
@@ -38,7 +38,7 @@
                     align: 'center'
                 },
                 {
-                    title: '时间',
+                    title: '添加时间',
                     field: 'createdate',
                     align: 'center'
                 },
@@ -47,7 +47,7 @@
                     field: 'oid',
                     align: 'center',
                     formatter: function (value, row, index) {//自定义显示可以写标签哦~
-                        return '<button type="buttton" class="btn btn-info" onclick="edit(\'' + row.oid + '\')">修改</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="buttton" class="btn btn-danger" onclick="del(\'' + row.oid + '\')">删除</button> ';
+                        return '<button type="buttton" class="btn btn-danger" onclick="del(\'' + row.oid + '\')">删除</button> ';
                     }
                 }
 
@@ -62,9 +62,7 @@
         });
 
     });
-function edit(oid) {
-    console.log(oid);
-}
+
 function del(oid) {
     swal({
         title: "确认弹框",
@@ -79,12 +77,16 @@ function del(oid) {
                 url: '/admin/tag/del',
                 data: {"oid": oid},
                 success: function (result) {
-                    console.log(result);
-                    swal("删除成功",{
-                        icon:"success",
-                    });
-
-                    $('#table_tagList').bootstrapTable('refresh');
+                    if(result.resultCode =='000000'){
+                        swal("删除成功",{
+                            icon:"success",
+                        });
+                        $('#table_tagList').bootstrapTable('refresh');
+                    }else {
+                        swal(result.message, {
+                            icon: "error",
+                        });
+                    }
                 },
                 error: function () {
                     swal("删除失败",{
@@ -97,20 +99,7 @@ function del(oid) {
     })
 
 }
- /**
-  * 正则匹配2-18位的中英文字符串
-  *
-  * @param str
-  * @returns {boolean}
-  */
- function validCN_ENString2_18(str) {
-     var pattern = /^[a-zA-Z0-9-\u4E00-\u9FA5_,， ]{2,18}$/;
-     if (pattern.test(str.trim())) {
-         return (true);
-     } else {
-         return (false);
-     }
- }
+
  //绑定modal上的保存按钮
  $('#saveButton').click(function () {
      var tagTitle = $("#tagTitle").val();
@@ -125,7 +114,7 @@ function del(oid) {
          data: {"tagTitle": tagTitle},
          success: function (result) {
              $('#myModal').modal('hide');
-             document.getElementById("linkForm").reset();
+             document.getElementById("tagForm").reset();
              if(result.resultCode =='000000'){
                  swal("保存成功",{
                      icon:"success",
@@ -142,9 +131,15 @@ function del(oid) {
              swal("保存失败",{
                  icon:"error",
              });
-             document.getElementById("linkForm").reset();
+             document.getElementById("tagForm").reset();
              $('#table_tagList').bootstrapTable('refresh');
          }
      });
 
  });
+
+function tagAdd() {
+    $('#edit-error-msg').css("display", "none");
+    document.getElementById("tagForm").reset();
+    $('#myModal').modal('show');
+}

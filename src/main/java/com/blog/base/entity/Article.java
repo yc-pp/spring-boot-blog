@@ -10,37 +10,29 @@ public class Article implements Serializable {
 
     private String articletitle;
 
-    private String articleabstract;
+    private String articleimgurl;
 
-    private String articleabstracttext;
+    private Integer articlecategoryid;
+
+    private String articlecategoryname;
 
     private String articletags;
 
     private Long articleauthorid;
 
-    private String articlecommentcount;
+    private Byte articlestatus;
 
-    private String articleviewcount;
+    private Long articleviewcount;
+
+    private Byte articlecommentable;
 
     private String articlepermalink;
 
-    private String articleputtop;
+    private Long articlecommentcount;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date articlecreated;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date articleupdated;
-
-    private Double articlerandomdouble;
-
-    private String articlesignid;
-
-    private String articlecommentable;
-
-    private String articleviewpwd;
-
-    private String articleimg1url;
-
-    private String articlestatus;
 
     private String articlecontent;
 
@@ -62,20 +54,28 @@ public class Article implements Serializable {
         this.articletitle = articletitle == null ? null : articletitle.trim();
     }
 
-    public String getArticleabstract() {
-        return articleabstract;
+    public String getArticleimgurl() {
+        return articleimgurl;
     }
 
-    public void setArticleabstract(String articleabstract) {
-        this.articleabstract = articleabstract == null ? null : articleabstract.trim();
+    public void setArticleimgurl(String articleimgurl) {
+        this.articleimgurl = articleimgurl == null ? null : articleimgurl.trim();
     }
 
-    public String getArticleabstracttext() {
-        return articleabstracttext;
+    public Integer getArticlecategoryid() {
+        return articlecategoryid;
     }
 
-    public void setArticleabstracttext(String articleabstracttext) {
-        this.articleabstracttext = articleabstracttext == null ? null : articleabstracttext.trim();
+    public void setArticlecategoryid(Integer articlecategoryid) {
+        this.articlecategoryid = articlecategoryid;
+    }
+
+    public String getArticlecategoryname() {
+        return articlecategoryname;
+    }
+
+    public void setArticlecategoryname(String articlecategoryname) {
+        this.articlecategoryname = articlecategoryname == null ? null : articlecategoryname.trim();
     }
 
     public String getArticletags() {
@@ -94,20 +94,28 @@ public class Article implements Serializable {
         this.articleauthorid = articleauthorid;
     }
 
-    public String getArticlecommentcount() {
-        return articlecommentcount;
+    public Byte getArticlestatus() {
+        return articlestatus;
     }
 
-    public void setArticlecommentcount(String articlecommentcount) {
-        this.articlecommentcount = articlecommentcount == null ? null : articlecommentcount.trim();
+    public void setArticlestatus(Byte articlestatus) {
+        this.articlestatus = articlestatus;
     }
 
-    public String getArticleviewcount() {
+    public Long getArticleviewcount() {
         return articleviewcount;
     }
 
-    public void setArticleviewcount(String articleviewcount) {
-        this.articleviewcount = articleviewcount == null ? null : articleviewcount.trim();
+    public void setArticleviewcount(Long articleviewcount) {
+        this.articleviewcount = articleviewcount;
+    }
+
+    public Byte getArticlecommentable() {
+        return articlecommentable;
+    }
+
+    public void setArticlecommentable(Byte articlecommentable) {
+        this.articlecommentable = articlecommentable;
     }
 
     public String getArticlepermalink() {
@@ -118,12 +126,12 @@ public class Article implements Serializable {
         this.articlepermalink = articlepermalink == null ? null : articlepermalink.trim();
     }
 
-    public String getArticleputtop() {
-        return articleputtop;
+    public Long getArticlecommentcount() {
+        return articlecommentcount;
     }
 
-    public void setArticleputtop(String articleputtop) {
-        this.articleputtop = articleputtop == null ? null : articleputtop.trim();
+    public void setArticlecommentcount(Long articlecommentcount) {
+        this.articlecommentcount = articlecommentcount;
     }
 
     public Date getArticlecreated() {
@@ -142,54 +150,6 @@ public class Article implements Serializable {
         this.articleupdated = articleupdated;
     }
 
-    public Double getArticlerandomdouble() {
-        return articlerandomdouble;
-    }
-
-    public void setArticlerandomdouble(Double articlerandomdouble) {
-        this.articlerandomdouble = articlerandomdouble;
-    }
-
-    public String getArticlesignid() {
-        return articlesignid;
-    }
-
-    public void setArticlesignid(String articlesignid) {
-        this.articlesignid = articlesignid == null ? null : articlesignid.trim();
-    }
-
-    public String getArticlecommentable() {
-        return articlecommentable;
-    }
-
-    public void setArticlecommentable(String articlecommentable) {
-        this.articlecommentable = articlecommentable == null ? null : articlecommentable.trim();
-    }
-
-    public String getArticleviewpwd() {
-        return articleviewpwd;
-    }
-
-    public void setArticleviewpwd(String articleviewpwd) {
-        this.articleviewpwd = articleviewpwd == null ? null : articleviewpwd.trim();
-    }
-
-    public String getArticleimg1url() {
-        return articleimg1url;
-    }
-
-    public void setArticleimg1url(String articleimg1url) {
-        this.articleimg1url = articleimg1url == null ? null : articleimg1url.trim();
-    }
-
-    public String getArticlestatus() {
-        return articlestatus;
-    }
-
-    public void setArticlestatus(String articlestatus) {
-        this.articlestatus = articlestatus == null ? null : articlestatus.trim();
-    }
-
     public String getArticlecontent() {
         return articlecontent;
     }
@@ -206,22 +166,18 @@ public class Article implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", oid=").append(oid);
         sb.append(", articletitle=").append(articletitle);
-        sb.append(", articleabstract=").append(articleabstract);
-        sb.append(", articleabstracttext=").append(articleabstracttext);
+        sb.append(", articleimgurl=").append(articleimgurl);
+        sb.append(", articlecategoryid=").append(articlecategoryid);
+        sb.append(", articlecategoryname=").append(articlecategoryname);
         sb.append(", articletags=").append(articletags);
         sb.append(", articleauthorid=").append(articleauthorid);
-        sb.append(", articlecommentcount=").append(articlecommentcount);
+        sb.append(", articlestatus=").append(articlestatus);
         sb.append(", articleviewcount=").append(articleviewcount);
+        sb.append(", articlecommentable=").append(articlecommentable);
         sb.append(", articlepermalink=").append(articlepermalink);
-        sb.append(", articleputtop=").append(articleputtop);
+        sb.append(", articlecommentcount=").append(articlecommentcount);
         sb.append(", articlecreated=").append(articlecreated);
         sb.append(", articleupdated=").append(articleupdated);
-        sb.append(", articlerandomdouble=").append(articlerandomdouble);
-        sb.append(", articlesignid=").append(articlesignid);
-        sb.append(", articlecommentable=").append(articlecommentable);
-        sb.append(", articleviewpwd=").append(articleviewpwd);
-        sb.append(", articleimg1url=").append(articleimg1url);
-        sb.append(", articlestatus=").append(articlestatus);
         sb.append(", articlecontent=").append(articlecontent);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

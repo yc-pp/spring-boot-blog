@@ -66,4 +66,14 @@
       tag_oId = #{tagOid,jdbcType=BIGINT}
     where oId = #{oid,jdbcType=BIGINT}
   </update>
+  <select id="selectByTagId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from yc_tag_article
+    where tag_oId = #{tagId,jdbcType=BIGINT}
+  </select>
+  <delete id="delTagArticleByArticleId" parameterType="java.lang.Long">
+    delete from yc_tag_article
+    where article_oId = #{articleId,jdbcType=BIGINT}
+  </delete>
 </mapper>

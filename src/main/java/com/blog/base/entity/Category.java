@@ -1,6 +1,9 @@
 package com.blog.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class Category implements Serializable {
     private Long oid;
@@ -14,6 +17,9 @@ public class Category implements Serializable {
     private String categoryorder;
 
     private String categorytagcnt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,7 +36,7 @@ public class Category implements Serializable {
     }
 
     public void setCategorytitle(String categorytitle) {
-        this.categorytitle = categorytitle == null ? null : categorytitle.trim();
+        this.categorytitle = categorytitle;
     }
 
     public String getCategoryuri() {
@@ -38,7 +44,7 @@ public class Category implements Serializable {
     }
 
     public void setCategoryuri(String categoryuri) {
-        this.categoryuri = categoryuri == null ? null : categoryuri.trim();
+        this.categoryuri = categoryuri;
     }
 
     public String getCategorydescription() {
@@ -46,7 +52,7 @@ public class Category implements Serializable {
     }
 
     public void setCategorydescription(String categorydescription) {
-        this.categorydescription = categorydescription == null ? null : categorydescription.trim();
+        this.categorydescription = categorydescription;
     }
 
     public String getCategoryorder() {
@@ -54,7 +60,7 @@ public class Category implements Serializable {
     }
 
     public void setCategoryorder(String categoryorder) {
-        this.categoryorder = categoryorder == null ? null : categoryorder.trim();
+        this.categoryorder = categoryorder;
     }
 
     public String getCategorytagcnt() {
@@ -62,23 +68,32 @@ public class Category implements Serializable {
     }
 
     public void setCategorytagcnt(String categorytagcnt) {
-        this.categorytagcnt = categorytagcnt == null ? null : categorytagcnt.trim();
+        this.categorytagcnt = categorytagcnt;
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", oid=").append(oid);
-        sb.append(", categorytitle=").append(categorytitle);
-        sb.append(", categoryuri=").append(categoryuri);
-        sb.append(", categorydescription=").append(categorydescription);
-        sb.append(", categoryorder=").append(categoryorder);
-        sb.append(", categorytagcnt=").append(categorytagcnt);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
+        final StringBuilder sb = new StringBuilder("Category{");
+        sb.append("oid=").append(oid);
+        sb.append(", categorytitle='").append(categorytitle).append('\'');
+        sb.append(", categoryuri='").append(categoryuri).append('\'');
+        sb.append(", categorydescription='").append(categorydescription).append('\'');
+        sb.append(", categoryorder='").append(categoryorder).append('\'');
+        sb.append(", categorytagcnt='").append(categorytagcnt).append('\'');
+        sb.append(", createdate=").append(createdate);
+        sb.append('}');
         return sb.toString();
     }
 }

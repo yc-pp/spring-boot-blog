@@ -2,8 +2,6 @@ package com.blog.base.util;
 
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 响应结果生成工具

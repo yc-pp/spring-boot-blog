@@ -101,4 +101,16 @@
       createDate = #{createdate,jdbcType=TIMESTAMP}
     where oId = #{oid,jdbcType=BIGINT}
   </update>
+  <select id="findLinkList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from yc_link
+    order by oId desc
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
+  <select id="getTotalLinks" parameterType="Map" resultType="int">
+    select count(*)  from yc_link
+  </select>
 </mapper>

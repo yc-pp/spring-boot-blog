@@ -1,7 +1,9 @@
 package com.blog.base.service.impl;
 
+import com.blog.base.dao.TagArticleMapper;
 import com.blog.base.dao.TagMapper;
 import com.blog.base.entity.Tag;
+import com.blog.base.entity.TagArticle;
 import com.blog.base.service.TagService;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
@@ -15,7 +17,8 @@ import java.util.List;
 public class TagServiceImpl implements TagService {
     @Autowired
     private TagMapper tagMapper;
-
+    @Autowired
+    private TagArticleMapper tagArticleMapper;
     @Override
     public BootStrapTableList getTagPage(PageQueryUtil pageUtil) {
         List<Tag> tags = tagMapper.findTagList(pageUtil);
@@ -38,7 +41,17 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Boolean delTag(Long oid) {
+        //查询标签是否关联文章
+        List<TagArticle> tagArticleList=tagArticleMapper.selectByTagId(oid);
+        if(tagArticleList != null && !tagArticleList.isEmpty()){
+            return false;
+        }
         return tagMapper.deleteByPrimaryKey(oid) > 0;
+    }
+
+    @Override
+    public List<Tag> findAllTag() {
+        return tagMapper.findTagList(null);
     }
 
 }
