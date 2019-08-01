@@ -30,7 +30,7 @@ public class KaptchaConfig {
         // 验证码长度
         properties.setProperty("kaptcha.textproducer.char.length", "5");
         // 字体
-        properties.setProperty("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");
+        properties.setProperty("kaptcha.textproducer.font.names", "微软雅黑");
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
 

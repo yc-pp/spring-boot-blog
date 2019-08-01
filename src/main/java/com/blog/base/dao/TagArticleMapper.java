@@ -1,6 +1,7 @@
 package com.blog.base.dao;
 
 import com.blog.base.entity.TagArticle;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface TagArticleMapper {
     List<TagArticle> selectByTagId(Long tagId);
     //根据文章Id删除文章-标签关联数据
     boolean delTagArticleByArticleId(Long articleId);
+
+    List<TagArticle> selectByArticleId(Long articleId);
+
+    int batchInsertTagArticle(@Param("tagArticleList") List<TagArticle> tagArticles);
 }

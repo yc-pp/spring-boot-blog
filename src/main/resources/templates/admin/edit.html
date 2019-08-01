@@ -13,22 +13,123 @@
 <div class="page-wrap">
     <!--bread头区域-->
     <div th:replace="admin/common::common-bread"></div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="">
-                <div class="row-fluid">
-                    <div class="span12 well">
-                        <div class="title">
-                            <button class="btn btn-primary btn-lg" onclick="articleAdd()">新增</button>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card card-primary card-outline">
+                <div class="card-body">
+                    <!-- 几个基础的输入框，名称、分类等输入框 -->
+                    <form id="blogForm" onsubmit="return false;">
+                        <div class="form-group" style="display:flex;">
+                            <input type="hidden" id="articleId" name="articleId" th:value="${null !=article and null!=article.oid} ? ${article.oid} : 0">
+                            <input type="text" style="width: 100%;padding:10px" class="form-control" id="articleName" name="articleName"
+                                   placeholder="*请输入文章标题(必填)" th:value="${null !=article and null!=article.articletitle} ? ${article.articletitle} :''"
+                                   required="true">
+<!--                            <input type="text" class="form-control" id="blogTags" name="blogTags"
+                                   placeholder="请输入文章标签"
+                                   style="width: 100%;">-->
                         </div>
                         <div class="form-group" id="article-editormd">
-                                <textarea style="display:none;"
-                                          th:utext="${article!=null and article.articlecontent !=null}?${article.articlecontent}: ''"></textarea>
+                                <textarea style="display:none;"  th:utext="${article!=null and article.articlecontent !=null}?${article.articlecontent}: ''"
+                                          ></textarea>
                         </div>
-                    </div>
+                        <div class="form-group" style="display:flex;">
+                            <span style="margin-top: 5px;margin-right: 5px;">文章分类：</span>
+                            <select class="form-control select2" style="width: 40%;" id="articleCategoryId"
+                                    data-placeholder="请选择分类...">
+                                <th:block th:if="${#lists.isEmpty(categories) ||  (article!=null and article.articlecategoryid==0)}">
+                                    <option value="0" selected="selected">默认分类</option>
+                                </th:block>
+                                <th:block th:unless="${#lists.isEmpty(categories)}">
+                                    <th:block th:each="category : ${categories}">
+                                        <option th:value="${category.oid}" th:text="${category.categorytitle}"
+                                                th:selected="${null !=article and null !=article.articlecategoryid and article.articlecategoryid==category.oid} ?true:false">
+                                            >
+                                        </option>
+                                    </th:block>
+                                </th:block>
+                            </select>
+                            <span style="margin-top: 5px;margin-left: 25px;">是否允许评论：</span>
+                            <div class="col-md-4" style="margin-top: -4px;margin-left: -2px;width: 370px">
+                                <div style="float: left;width: 20%;">
+                                    <div class="articleStatus-radio">
+                                        <input id="articleCommentable" type="radio" name="articleCommentable" value="0"
+                                               th:checked="${null == article || article.articlecommentable ==0} ? true:false">
+                                        <label for="articleCommentable"></label>
+                                        <span style="margin-left: 10px">是</span>
+                                    </div>
+                                </div>
+                                <div style="float: left;width: 20%;">
+                                    <div class="articleStatus-radio">
+                                        <input id="articleCommentable1" type="radio" name="articleCommentable" value="1"
+                                               th:checked="${null != article and article.articlecommentable ==1} ? true:false">
+                                        <label for="articleCommentable1"></label>
+                                        <span style="margin-left: 10px">否</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:flex;">
+                            <span style="margin-top: 5px;">文章标签：</span>
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 5px;margin-left: 35px;width: 400px">
+                                    <th:block th:if="${#lists.isEmpty(tags) || (article!=null and article.articletags=='0')}">
+                                        <div style="float: left;width: 50%;">
+                                            <div class='tag-checkbox'>
+                                                <input type="checkbox" id="checkbox" th:name='articleTag' th:value="0">
+                                                <label for="checkbox">默认标签</label>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                    <th:block th:unless="${#lists.isEmpty(tags)}">
+                                        <th:block th:each="tagVO : ${tags}">
+                                            <div style="float: left;width: 50%;">
+                                                <div class='tag-checkbox'>
+                                                    <input type="checkbox" th:id="${tagVO.tag.oid}" th:name="articleTag" th:value="${tagVO.tag.tagtitle}"
+                                                    th:checked="${tagVO.choose=='1'} ? true :false">
+                                                    <label th:for="${tagVO.tag.oid}" th:text="${tagVO.tag.tagtitle}"></label>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <span style="margin-top: 13px;margin-left: 5px;">文&nbsp;&nbsp;&nbsp;章
+                                &nbsp;&nbsp;&nbsp;状&nbsp;&nbsp;&nbsp;态：</span>
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 5px;margin-left: 30px;width: 370px">
+                                    <div style="float: left;width: 20%;">
+                                        <div class="articleStatus-radio">
+                                            <input id="articleStatus" type="radio" name="articleStatus" value="0"
+                                                   th:checked="${null == article || article.articlestatus ==0} ? true:false">
+                                            <label for="articleStatus"></label>
+                                            <span style="margin-left: 10px">草稿</span>
+                                        </div>
+                                    </div>
+                                    <div style="float: left;width: 20%;">
+                                        <div class="articleStatus-radio">
+                                            <input id="articleStatus1" type="radio" name="articleStatus" value="1"
+                                                   th:checked="${null != article and article.articlestatus ==1} ? true:false">
+                                            <label for="articleStatus1"></label>
+                                            <span style="margin-left: 10px">发布</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="text-align: center">
+                            <!-- 按钮 -->
+                            &nbsp;<button class="btn btn-info float-right "
+                                          id="saveArticle">保存文章
+                        </button>&nbsp;
+                            &nbsp;<button class="btn btn-secondary float-right" style="margin-left: 50px;"
+                                          id="returnArticle">返回文章列表
+                        </button>&nbsp;
+                        </div>
+                    </form>
                 </div>
+
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </div>
     <!--foot脚区域-->
     <div th:replace="admin/common::common-foot"></div>

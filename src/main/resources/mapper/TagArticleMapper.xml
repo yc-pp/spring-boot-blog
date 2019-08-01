@@ -76,4 +76,15 @@
     delete from yc_tag_article
     where article_oId = #{articleId,jdbcType=BIGINT}
   </delete>
+  <select id="selectByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from yc_tag_article where article_oId = #{articleId,jdbcType=BIGINT}
+  </select>
+  <insert id="batchInsertTagArticle" parameterType="java.util.List">
+    INSERT INTO yc_tag_article(article_oId,tag_oId) VALUES
+    <foreach collection="tagArticleList" item="tac" separator=",">
+      (#{tac.articleOid,jdbcType=BIGINT},#{tac.tagOid,jdbcType=BIGINT})
+    </foreach>
+  </insert>
 </mapper>

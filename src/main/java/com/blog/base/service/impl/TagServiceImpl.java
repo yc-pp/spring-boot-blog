@@ -7,9 +7,11 @@ import com.blog.base.entity.TagArticle;
 import com.blog.base.service.TagService;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
+import com.blog.base.vo.TagVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,8 +52,43 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> findAllTag() {
-        return tagMapper.findTagList(null);
+    public List<TagVO> findAllTag(Long articleOid) {
+        if(articleOid == 0L){
+            List<TagVO> tagVOList=new ArrayList<TagVO>();
+            List<Tag> tagList =tagMapper.findTagList(null);
+            if(tagList!=null && !tagList.isEmpty()){
+                for(Tag tag : tagList){
+                    TagVO tagVO=new TagVO();
+                    tagVO.setTag(tag);
+                    tagVO.setChoose("0");
+                    tagVOList.add(tagVO);
+                }
+                return tagVOList;
+            }else{
+                return null;
+            }
+        }else{
+            List<Tag> tagList=tagMapper.findTagList(null);
+            List<TagArticle> tagArticleList=tagArticleMapper.selectByArticleId(articleOid);
+            List<TagVO> tagVOList=new ArrayList<TagVO>();
+            if(tagList !=null && !tagList.isEmpty()){
+                for(Tag tag : tagList){
+                    TagVO tagVO =new TagVO();
+                    tagVO.setTag(tag);
+                    tagVO.setChoose("0");
+                    for(TagArticle tagArticle : tagArticleList){
+                        if(tag.getOid() == tagArticle.getTagOid()){
+                            tagVO.setChoose("1");
+                            break;
+                        }
+                    }
+                    tagVOList.add(tagVO);
+                }
+                return tagVOList;
+            }else{
+                return null;
+            }
+        }
     }
 
 }

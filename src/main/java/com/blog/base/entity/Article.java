@@ -12,7 +12,7 @@ public class Article implements Serializable {
 
     private String articleimgurl;
 
-    private Integer articlecategoryid;
+    private Long articlecategoryid;
 
     private String articlecategoryname;
 
@@ -62,11 +62,11 @@ public class Article implements Serializable {
         this.articleimgurl = articleimgurl == null ? null : articleimgurl.trim();
     }
 
-    public Integer getArticlecategoryid() {
+    public Long getArticlecategoryid() {
         return articlecategoryid;
     }
 
-    public void setArticlecategoryid(Integer articlecategoryid) {
+    public void setArticlecategoryid(Long articlecategoryid) {
         this.articlecategoryid = articlecategoryid;
     }
 

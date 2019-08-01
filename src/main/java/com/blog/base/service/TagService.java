@@ -1,8 +1,8 @@
 package com.blog.base.service;
 
-import com.blog.base.entity.Tag;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
+import com.blog.base.vo.TagVO;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public interface TagService {
 
     Boolean delTag(Long oid);
 
-    List<Tag> findAllTag();
+    List<TagVO> findAllTag(Long articleOid);
 }
