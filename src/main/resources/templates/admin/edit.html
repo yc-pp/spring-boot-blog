@@ -75,7 +75,8 @@
                                     <th:block th:if="${#lists.isEmpty(tags) || (article!=null and article.articletags=='0')}">
                                         <div style="float: left;width: 50%;">
                                             <div class='tag-checkbox'>
-                                                <input type="checkbox" id="checkbox" th:name='articleTag' th:value="0">
+                                                <input type="checkbox" id="checkbox" th:name='articleTag' th:value="0"
+                                                th:checked="${article!=null and article.articletags=='0'} ? true:false">
                                                 <label for="checkbox">默认标签</label>
                                             </div>
                                         </div>
