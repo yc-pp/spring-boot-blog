@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--header头页面-->
+<header th:replace="admin/common::common-head"></header>
+<body>
+<!--nav区域-->
+<div th:replace="admin/common::common-nav"></div>
+<!--menu菜单区域-->
+<div th:replace="admin/common::common-menu"></div>
+<div class="page-wrap">
+    <!--bread头区域-->
+    <div th:replace="admin/common::common-bread"></div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="">
+                <div class="row-fluid">
+                    <div class="span12 well">
+                        <div class="title">
+                            <button class="btn btn-primary btn-lg" onclick="articleAdd()">新增</button>
+                        </div>
+                        <div class="well-content" >
+                            <table id="table_tagList" class="table table-bordered" data-show-columns="false">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--foot脚区域-->
+    <div th:replace="admin/common::common-foot"></div>
+</div>
+<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{~/static/admin/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{~/static/admin/plugins/bootstrap/js/bootstrap-table.js}"></script>
+<script th:src="@{~/static/admin/plugins/bootstrap/js/bootstrap-table-zh-CN.js}"></script>
+<script th:src="@{~/static/admin/plugins/jQueryUI/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{~/static/admin/plugins/sweetalert/js/sweetalert.min.js}"></script>
+<script th:src="@{~/static/admin/plugins/js/menu.js}"></script>
+<script th:src="@{~/static/admin/plugins/js/util.js}"></script>
+<script th:src="@{~/static/admin/plugins/js/article.js}"></script>
+</body>
+</html>

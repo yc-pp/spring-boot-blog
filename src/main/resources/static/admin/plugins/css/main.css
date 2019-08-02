@@ -1,0 +1,112 @@
+ul.thumbnails.image_picker_selector {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px; }
+ul.thumbnails.image_picker_selector li {
+    margin: 0px 12px 12px 0px;
+    float: left; }
+ul.thumbnails.image_picker_selector li .thumbnail {
+    padding: 6px;
+    border: 1px solid #dddddd; }
+ul.thumbnails.image_picker_selector li .thumbnail.selected {
+    background: #0088cc; }
+.tag-checkbox {
+    position: relative;
+    height: 30px;
+}
+.tag-checkbox input[type='checkbox'] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+.tag-checkbox label {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    height: 20px;
+    line-height: 20px;
+}
+.tag-checkbox label:before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd;
+    /*border-radius: 50%;*/
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+}
+
+.tag-checkbox label:after {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: 0;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+/*    background: #fff;*/
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+}
+
+.tag-checkbox input[type='checkbox']:checked + label:before {
+    background: #4cd764;
+    border-color: #4cd764;
+}
+.articleStatus-radio {
+    position: relative;
+    line-height: 38px;
+}
+
+.articleStatus-radio input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+
+.articleStatus-radio label {
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+/*设置选中的input的样式*/
+/* + 是兄弟选择器,获取选中后的label元素*/
+.articleStatus-radio input:checked+label {
+    background-color: #4cd764;
+    border: 1px solid #4cd764;
+}
+
+.articleStatus-radio input:checked+label::after {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 10px;
+    top: 3px;
+    left: 6px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg)
+}
