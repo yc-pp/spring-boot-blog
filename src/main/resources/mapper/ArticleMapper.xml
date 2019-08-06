@@ -216,14 +216,33 @@
   </update>
   <select id="findArticleList" parameterType="Map" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
-    from yc_article
+    <include refid="Base_Column_List"/>,
+    <include refid="Blob_Column_List" />
+    from yc_article where 1=1
+    <if test="keyword!=null">
+      AND (articleTitle like CONCAT('%','${keyword}','%' ) or articleCategoryName like CONCAT('%','${keyword}','%' ))
+    </if>
+    <if test="blogStatus!=null">
+      AND articleStatus = #{blogStatus}
+    </if>
+    <if test="blogCategoryId!=null">
+      AND articleCategoryId = #{blogCategoryId}
+    </if>
     order by oId desc
     <if test="start!=null and limit!=null">
       limit #{start},#{limit}
     </if>
   </select>
   <select id="getTotalArticles" parameterType="Map" resultType="int">
-    select count(*)  from yc_article
+    select count(*)  from yc_article where 1=1
+    <if test="keyword!=null">
+      AND (articleTitle like CONCAT('%','${keyword}','%' ) or articleCategoryName like CONCAT('%','${keyword}','%' ))
+    </if>
+    <if test="blogStatus!=null">
+      AND articleStatus = #{blogStatus}
+    </if>
+    <if test="blogCategoryId!=null">
+      AND articleCategoryId = #{blogCategoryId}
+    </if>
   </select>
 </mapper>

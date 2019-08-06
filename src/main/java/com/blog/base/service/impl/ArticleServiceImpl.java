@@ -11,11 +11,14 @@ import com.blog.base.entity.TagArticle;
 import com.blog.base.service.ArticleService;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
+import com.blog.base.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -128,5 +131,19 @@ public class ArticleServiceImpl implements ArticleService {
             return false;
         }
 
+    }
+
+    @Override
+    public PageResult getBlogsForIndexPage(int page) {
+        Map params = new HashMap();
+        params.put("page", (page - 1) * 5);
+        //每页8条
+        params.put("limit", 5);
+        params.put("blogStatus", 1);//过滤发布状态下的数据
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        List<Article> blogList = articleMapper.findArticleList(pageUtil);
+        int total = articleMapper.getTotalArticles(pageUtil);
+        PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), page);
+        return pageResult;
     }
 }
