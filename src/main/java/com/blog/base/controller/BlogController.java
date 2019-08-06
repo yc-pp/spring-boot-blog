@@ -26,6 +26,7 @@ public class BlogController {
             return "admin/error/error_404.html";
         }
         request.setAttribute("blogResultPage", blogResultPage);
+        request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         return "admin/blog/index";
     }
 }

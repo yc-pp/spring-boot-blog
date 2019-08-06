@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/blog/blogCom::common-head"></header>
+<body class="lay-blog">
+<div th:replace="admin/blog/blogCom::common-header"></div>
+<div class="container-wrap">
+    <div class="container" style="width: 100%">
+        <div class="contar-wrap" style="width: 61.9%;float: left">
+            <h4 class="item-title">
+                <p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的博客</span></p>
+            </h4>
+            <th:block th:if="${blogResultPage !=null}">
+                <th:block th:each="blog : ${blogResultPage.list}">
+                    <div class="item">
+                        <div class="item-box  layer-photos-demo2 layer-photos-demo">
+                            <div class="blog-flex-center">
+                                <div class="blog-flex0">
+                                    <img th:src="@{~/static/admin/plugins/blog/img/person.png}" alt="" class="link avatar avatar-image">
+                                </div>
+                                <div class="author-lockup blog-flex1">
+                                    <a class="link" href="javascript:;" th:text="${name}">登录名</a>
+                                    <span class="in">in</span>
+                                    <span class="category-name">
+                                <a class="category-name" rel="tag" th:href="${'/admin/blog/category/'+${blog.articlecategoryname}}" th:utext="${blog.articlecategoryname}">分类</a>
+							</span>
+                                </div>
+                            </div>
+                            <h3><a href="details.html" th:text="${blog.articletitle}">文章标题</a></h3>
+                            <h5>发布于：<span th:text="${#dates.format(blog.articlecreated,'yyyy-MM-dd HH:mm:ss')}">发布时间</span></h5>
+                            <p>
+                                <th:block th:utext="${#strings.abbreviate(blog.articlecontent,150)}">
+                                </th:block>
+                            </p>
+                            <img th:src="@{~/static/admin/plugins/blog/img/item.png}" alt="">
+                        </div>
+                        <div class="comment count">
+                            <a href="javascript:;">评论(<th:block th:utext="${blog.articlecommentcount}"></th:block>)</a>
+                            <a href="javascript:;" class="like">点赞</a>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+            <div class="item-btn">
+                <button class="layui-btn">下一页</button>
+            </div>
+        </div>
+        <div class="sidebar-container" style="width:32%;float:right">
+            <section>
+                        <div class="sidebar-header">
+                            <span class="sidebar-header-title">
+                                热门标签
+                            </span>
+                        </div>
+                        <div class="tags ">
+                            <a rel="tag" href="/tag/RESTful">RESTful(6)</a>
+                            <a rel="tag" href="/tag/优化">优化(5)</a>
+                            <a rel="tag" href="/tag/easyUI">easyUI(4)</a>
+                            <a rel="tag" href="/tag/Redis">Redis(4)</a>
+                            <a rel="tag" href="/tag/网络安全">网络安全(4)</a>
+                            <a rel="tag" href="/tag/网络攻击">网络攻击(3)</a>
+                            <a rel="tag" href="/tag/Springboot">Springboot(3)</a>
+                            <a rel="tag" href="/tag/Thymeleaf">Thymeleaf(3)</a>
+                            <a rel="tag" href="/tag/druid">druid(3)</a>
+                            <a rel="tag" href="/tag/ssm整合">ssm整合(3)</a>
+                            <a rel="tag" href="/tag/Spring">Spring(3)</a>
+                            <a rel="tag" href="/tag/SpringMVC">SpringMVC(3)</a>
+                            <a rel="tag" href="/tag/MyBatis">MyBatis(3)</a>
+                            <a rel="tag" href="/tag/单元测试">单元测试(3)</a>
+                            <a rel="tag" href="/tag/mysql">mysql(3)</a>
+                            <a rel="tag" href="/tag/大型网站技术架构">大型网站技术架构(2)</a>
+                            <a rel="tag" href="/tag/读书">读书(2)</a>
+                            <a rel="tag" href="/tag/jdbc连接池">jdbc连接池(2)</a>
+                            <a rel="tag" href="/tag/慢sql">慢sql(2)</a>
+                            <a rel="tag" href="/tag/日志">日志(2)</a>
+                        </div>
+            </section>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div th:replace="admin/blog/blogCom::common-footer"></div>
+<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
+<script>
+    layui.config({
+        base: '/static/admin/plugins/blog/js/'
+    }).use('blog');
+</script>
+</body>
+</html>
