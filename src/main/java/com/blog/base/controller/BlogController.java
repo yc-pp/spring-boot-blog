@@ -1,6 +1,7 @@
 package com.blog.base.controller;
 
 import com.blog.base.service.ArticleService;
+import com.blog.base.service.TagService;
 import com.blog.base.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 public class BlogController {
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private TagService tagService;
     @GetMapping("/index")
     public String index(HttpServletRequest request) {
         return this.page(request, 1);
@@ -27,6 +30,8 @@ public class BlogController {
         }
         request.setAttribute("blogResultPage", blogResultPage);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
+        request.setAttribute("hotTagList",tagService.getHotTagList());
+        System.out.println(tagService.getHotTagList());
         return "admin/blog/index";
     }
 }

@@ -7,6 +7,7 @@ import com.blog.base.entity.TagArticle;
 import com.blog.base.service.TagService;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
+import com.blog.base.vo.TagHotVO;
 import com.blog.base.vo.TagVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,6 +90,11 @@ public class TagServiceImpl implements TagService {
                 return null;
             }
         }
+    }
+
+    @Override
+    public List<TagHotVO> getHotTagList() {
+        return tagMapper.getHotTagList();
     }
 
 }

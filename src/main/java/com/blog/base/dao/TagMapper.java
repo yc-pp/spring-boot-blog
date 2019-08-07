@@ -2,6 +2,7 @@ package com.blog.base.dao;
 
 import com.blog.base.entity.Tag;
 import com.blog.base.util.PageQueryUtil;
+import com.blog.base.vo.TagHotVO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface TagMapper {
     List<Tag> findTagList(PageQueryUtil pageUtil);
 
     int getTotalTags(PageQueryUtil pageUtil);
+
+    List<TagHotVO> getHotTagList();
 }

@@ -73,37 +73,23 @@
                 </th:block>
             </div>
         </div>
-        <div class="sidebar-container" style="width:32%;float:right">
-            <section>
-                        <div class="sidebar-header">
+        <th:block th:if="${hotTagList!=null}">
+            <div class="sidebar-container" style="width:32%;float:right">
+                <section>
+                    <div class="sidebar-header">
                             <span class="sidebar-header-title">
                                 热门标签
                             </span>
-                        </div>
-                        <div class="tags ">
-                            <a rel="tag" href="/tag/1">1(6)</a>
-                            <a rel="tag" href="/tag/2">2(5)</a>
-                            <a rel="tag" href="/tag/3">3(4)</a>
-                            <a rel="tag" href="/tag/4">4(4)</a>
-                            <a rel="tag" href="/tag/5">5(4)</a>
-                            <a rel="tag" href="/tag/6">6(3)</a>
-                            <a rel="tag" href="/tag/7">7(3)</a>
-                            <a rel="tag" href="/tag/8">8(3)</a>
-                            <a rel="tag" href="/tag/9">9(3)</a>
-                            <a rel="tag" href="/tag/10">10(3)</a>
-                            <a rel="tag" href="/tag/11">11(3)</a>
-                            <a rel="tag" href="/tag/12">12(3)</a>
-                            <a rel="tag" href="/tag/13">13(3)</a>
-                            <a rel="tag" href="/tag/14">14(3)</a>
-                            <a rel="tag" href="/tag/15">15(3)</a>
-                            <a rel="tag" href="/tag/16">16(2)</a>
-                            <a rel="tag" href="/tag/17">17(2)</a>
-                            <a rel="tag" href="/tag/18">18(2)</a>
-                            <a rel="tag" href="/tag/19">19(2)</a>
-                            <a rel="tag" href="/tag/20">20(2)</a>
-                        </div>
-            </section>
-        </div>
+                    </div>
+                    <div class="tags ">
+                        <th:block th:each="hotTag : ${hotTagList}">
+                            <a rel="tag" th:href="@{'/admin/blog/tag/'+${hotTag.tagOId}}"
+                               th:utext="${hotTag.tagTitle}+'（'+${hotTag.tagCount}+'）'">标签（数量）</a>
+                        </th:block>
+                    </div>
+                </section>
+            </div>
+        </th:block>
         <div style="clear:both"></div>
     </div>
 </div>

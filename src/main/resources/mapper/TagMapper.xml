@@ -6,6 +6,11 @@
     <result column="tagTitle" jdbcType="VARCHAR" property="tagtitle" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
   </resultMap>
+  <resultMap id="BaseHotTagListMap" type="com.blog.base.vo.TagHotVO">
+    <result column="tag_oId" jdbcType="BIGINT" property="tagOId" />
+    <result column="tag_count" jdbcType="BIGINT" property="tagCount" />
+    <result column="tagTitle" jdbcType="VARCHAR" property="tagTitle" />
+  </resultMap>
   <sql id="Base_Column_List">
     oId, tagTitle, createDate
   </sql>
@@ -83,5 +88,14 @@
   </select>
   <select id="getTotalTags" parameterType="Map" resultType="int">
     select count(*)  from yc_tag
+  </select>
+  <select id="getHotTagList" resultMap="BaseHotTagListMap">
+    SELECT t_r.*, t.tagTitle  FROM
+	    ( SELECT r.tag_oId, r.tag_count FROM
+                ( SELECT tag_oId, COUNT(*) AS tag_count FROM
+                    ( SELECT tr.tag_oId FROM yc_tag_article tr LEFT JOIN yc_article b ON tr.article_oId = b.oid) trb GROUP BY tag_oId
+                ) r  ORDER BY tag_count DESC LIMIT 20
+	    ) AS t_r
+        LEFT JOIN yc_tag t ON t_r.tag_oId = t.oid
   </select>
 </mapper>
