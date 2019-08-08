@@ -245,4 +245,14 @@
       AND articleCategoryId = #{blogCategoryId}
     </if>
   </select>
+  <select id="findArticleListByType" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from yc_article where articleStatus='1'
+    <if test="type !=null and type==0">
+        order by articleViewCount desc
+    </if>
+    <if test="type != null and type==1">
+        order by  oId desc
+    </if>
+    limit #{limit}
+  </select>
 </mapper>

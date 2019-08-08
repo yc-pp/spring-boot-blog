@@ -5,6 +5,8 @@ import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
 import com.blog.base.util.PageResult;
 
+import java.util.List;
+
 public interface ArticleService {
     BootStrapTableList getArticlePage(PageQueryUtil pageUtil);
 
@@ -17,4 +19,8 @@ public interface ArticleService {
     Boolean updateArticle(Article article);
 
     PageResult getBlogsForIndexPage(int page);
+
+    List<Article> getBlogListForIndexPage(int type);
+
+    PageResult getBlogsForCategory(String category,int page);
 }

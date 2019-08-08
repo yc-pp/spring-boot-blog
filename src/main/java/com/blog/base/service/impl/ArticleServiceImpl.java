@@ -146,4 +146,24 @@ public class ArticleServiceImpl implements ArticleService {
         PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), page);
         return pageResult;
     }
+
+    @Override
+    public List<Article> getBlogListForIndexPage(int type) {
+        return articleMapper.findArticleListByType(type,10);
+    }
+
+    @Override
+    public PageResult getBlogsForCategory(String category, int page) {
+        Map params = new HashMap();
+        params.put("page", (page - 1) * 5);
+        //每页8条
+        params.put("limit", 5);
+        params.put("blogCategoryId", category);
+        params.put("blogStatus", 1);//过滤发布状态下的数据
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        List<Article> blogList = articleMapper.findArticleList(pageUtil);
+        int total = articleMapper.getTotalArticles(pageUtil);
+        PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), page);
+        return pageResult;
+    }
 }

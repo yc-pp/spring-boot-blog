@@ -31,7 +31,21 @@ public class BlogController {
         request.setAttribute("blogResultPage", blogResultPage);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         request.setAttribute("hotTagList",tagService.getHotTagList());
-        System.out.println(tagService.getHotTagList());
+        request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
+        return "admin/blog/index";
+    }
+
+    @GetMapping({"/category/{articlecategoryid}"})
+    public String category(HttpServletRequest request, @PathVariable("articlecategoryid") String articlecategoryid) {
+        return category(request, articlecategoryid, 1);
+    }
+    @GetMapping({"/category/{articlecategoryid}/{page}"})
+    public String category(HttpServletRequest request, @PathVariable("articlecategoryid") String articlecategoryid, @PathVariable("page") Integer page) {
+        PageResult blogPageResult = articleService.getBlogsForCategory(articlecategoryid,page);
+        request.setAttribute("blogResultPage", blogPageResult);
+        request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
+        request.setAttribute("hotTagList",tagService.getHotTagList());
+        request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
         return "admin/blog/index";
     }
 }

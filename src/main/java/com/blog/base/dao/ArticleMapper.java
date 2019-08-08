@@ -2,6 +2,7 @@ package com.blog.base.dao;
 
 import com.blog.base.entity.Article;
 import com.blog.base.util.PageQueryUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface ArticleMapper {
     List<Article> findArticleList(PageQueryUtil pageUtil);
 
     int getTotalArticles(PageQueryUtil pageUtil);
+
+    List<Article> findArticleListByType(@Param("type") int type, @Param("limit") int limit);
 }

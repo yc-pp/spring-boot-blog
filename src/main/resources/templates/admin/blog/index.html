@@ -21,7 +21,7 @@
                                     <a class="link" href="javascript:;" th:text="${name}">登录名</a>
                                     <span class="in">in</span>
                                     <span class="category-name">
-                                <a class="category-name" rel="tag" th:href="@{'/admin/blog/category/'+${blog.articlecategoryname}}" th:utext="${blog.articlecategoryname}">分类</a>
+                                <a class="category-name" rel="tag" th:href="@{'/admin/blog/category/'+${blog.articlecategoryid}}" th:utext="${blog.articlecategoryname}">分类</a>
 							</span>
                                 </div>
                             </div>
@@ -44,37 +44,37 @@
                 <th:block th:if="${null != blogResultPage}">
                     <ul class="am-pagination">
                         <li th:class="${blogResultPage.currPage==1}?'disabled' : 'am-pagination-prev'"><a
-                                th:href="@{${blogResultPage.currPage==1}?'##':'/page/' + ${blogResultPage.currPage-1}}">&laquo;</a>
+                                th:href="@{${blogResultPage.currPage==1}?'##':'/admin/blog/page/' + ${blogResultPage.currPage-1}}">&laquo;</a>
                         </li>
                         <li th:if="${blogResultPage.currPage-3 >=1}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage-3}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-3}}"
                                 th:text="${blogResultPage.currPage -3}">1</a></li>
                         <li th:if="${blogResultPage.currPage-2 >=1}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage-2}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-2}}"
                                 th:text="${blogResultPage.currPage -2}">1</a></li>
                         <li th:if="${blogResultPage.currPage-1 >=1}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage-1}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-1}}"
                                 th:text="${blogResultPage.currPage -1}">1</a></li>
                         <li class="active"><a href="#" th:text="${blogResultPage.currPage}">1</a></li>
                         <li th:if="${blogResultPage.currPage+1 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage+1}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+1}}"
                                 th:text="${blogResultPage.currPage +1}">1</a></li>
                         <li th:if="${blogResultPage.currPage+2 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage+2}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+2}}"
                                 th:text="${blogResultPage.currPage +2}">1</a></li>
                         <li th:if="${blogResultPage.currPage+3 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/page/' + ${blogResultPage.currPage+3}}"
+                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+3}}"
                                 th:text="${blogResultPage.currPage +3}">1</a></li>
                         <li th:class="${blogResultPage.currPage==blogResultPage.totalPage}?'disabled' : ''">
                             <a
-                                    th:href="@{${blogResultPage.currPage==blogResultPage.totalPage}?'##' : '/page/' + ${blogResultPage.currPage+1}}">&raquo;</a>
+                                    th:href="@{${blogResultPage.currPage==blogResultPage.totalPage}?'##' : '/admin/blog/page/' + ${blogResultPage.currPage+1}}">&raquo;</a>
                         </li>
                     </ul>
                 </th:block>
             </div>
         </div>
-        <th:block th:if="${hotTagList!=null}">
-            <div class="sidebar-container" style="width:32%;float:right">
+        <div class="sidebar-container" style="width:32%;float:right">
+            <th:block th:if="${hotTagList!=null}">
                 <section>
                     <div class="sidebar-header">
                             <span class="sidebar-header-title">
@@ -88,8 +88,24 @@
                         </th:block>
                     </div>
                 </section>
-            </div>
-        </th:block>
+            </th:block>
+            <th:block th:if="${newArticleList!=null}">
+                <selection>
+                    <div class="sidebar-header">
+                        <span class="sidebar-header-title">最新发布</span>
+                    </div>
+                    <div class="sidebar-list">
+                        <ul class="sidebar-list-body sidebar-list-items">
+                            <th:block th:each="newArticle : ${newArticleList}">
+                                <li class="sidebar-list-item"><a th:href="@{'/admin/blog/article/'+${newArticle.oid}}"
+                                       th:utext="${newArticle.articletitle}" class="tag tooltipped tooltipped-n">
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </selection>
+            </th:block>
+        </div>
         <div style="clear:both"></div>
     </div>
 </div>
