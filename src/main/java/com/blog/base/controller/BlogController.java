@@ -28,10 +28,12 @@ public class BlogController {
         if(blogResultPage == null){
             return "admin/error/error_404.html";
         }
+        request.setAttribute("pageUrl","page/");
         request.setAttribute("blogResultPage", blogResultPage);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         request.setAttribute("hotTagList",tagService.getHotTagList());
         request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
+        request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
         return "admin/blog/index";
     }
 
@@ -42,10 +44,12 @@ public class BlogController {
     @GetMapping({"/category/{articlecategoryid}/{page}"})
     public String category(HttpServletRequest request, @PathVariable("articlecategoryid") String articlecategoryid, @PathVariable("page") Integer page) {
         PageResult blogPageResult = articleService.getBlogsForCategory(articlecategoryid,page);
+        request.setAttribute("pageUrl","category/"+articlecategoryid+"/");
         request.setAttribute("blogResultPage", blogPageResult);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         request.setAttribute("hotTagList",tagService.getHotTagList());
         request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
+        request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
         return "admin/blog/index";
     }
 }

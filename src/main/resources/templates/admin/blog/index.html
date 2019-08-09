@@ -44,30 +44,30 @@
                 <th:block th:if="${null != blogResultPage}">
                     <ul class="am-pagination">
                         <li th:class="${blogResultPage.currPage==1}?'disabled' : 'am-pagination-prev'"><a
-                                th:href="@{${blogResultPage.currPage==1}?'##':'/admin/blog/page/' + ${blogResultPage.currPage-1}}">&laquo;</a>
+                                th:href="@{${blogResultPage.currPage==1}?'##':'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage-1}}">&laquo;</a>
                         </li>
                         <li th:if="${blogResultPage.currPage-3 >=1}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-3}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl}+ ${blogResultPage.currPage-3}}"
                                 th:text="${blogResultPage.currPage -3}">1</a></li>
                         <li th:if="${blogResultPage.currPage-2 >=1}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-2}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage-2}}"
                                 th:text="${blogResultPage.currPage -2}">1</a></li>
                         <li th:if="${blogResultPage.currPage-1 >=1}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage-1}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage-1}}"
                                 th:text="${blogResultPage.currPage -1}">1</a></li>
                         <li class="active"><a href="#" th:text="${blogResultPage.currPage}">1</a></li>
                         <li th:if="${blogResultPage.currPage+1 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+1}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage+1}}"
                                 th:text="${blogResultPage.currPage +1}">1</a></li>
                         <li th:if="${blogResultPage.currPage+2 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+2}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage+2}}"
                                 th:text="${blogResultPage.currPage +2}">1</a></li>
                         <li th:if="${blogResultPage.currPage+3 <=blogResultPage.totalPage}"><a
-                                th:href="@{'/admin/blog/page/' + ${blogResultPage.currPage+3}}"
+                                th:href="@{'/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage+3}}"
                                 th:text="${blogResultPage.currPage +3}">1</a></li>
                         <li th:class="${blogResultPage.currPage==blogResultPage.totalPage}?'disabled' : ''">
                             <a
-                                    th:href="@{${blogResultPage.currPage==blogResultPage.totalPage}?'##' : '/admin/blog/page/' + ${blogResultPage.currPage+1}}">&raquo;</a>
+                                    th:href="@{${blogResultPage.currPage==blogResultPage.totalPage}?'##' : '/admin/blog/'+ ${pageUrl} + ${blogResultPage.currPage+1}}">&raquo;</a>
                         </li>
                     </ul>
                 </th:block>
@@ -103,6 +103,22 @@
                             </th:block>
                         </ul>
                     </div>
+                </selection>
+            </th:block>
+            <th:block th:if="${hotArticleList!=null}">
+                <selection>
+                    <div class="sidebar-header">
+                        <span class="sidebar-header-title">点击最多</span>
+                    </div>
+                    <main class="sidebar-lists">
+                        <ul>
+                            <th:block th:each="hotArticle : ${hotArticleList}">
+                                <li class="sidebar-list-item"><a th:href="@{'/admin/blog/article/'+${hotArticle.oid}}"
+                                                                 th:utext="${hotArticle.articletitle}" class="tag tooltipped tooltipped-n">
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </main>
                 </selection>
             </th:block>
         </div>
