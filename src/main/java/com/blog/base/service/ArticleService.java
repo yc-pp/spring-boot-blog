@@ -4,6 +4,7 @@ import com.blog.base.entity.Article;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
 import com.blog.base.util.PageResult;
+import com.blog.base.vo.BlogVO;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface ArticleService {
     List<Article> getBlogListForIndexPage(int type);
 
     PageResult getBlogsForCategory(String category,int page);
+
+    PageResult getBlogsForTag(String tagTitle,int page);
+
+    BlogVO getBlogById(Long oid);
 }

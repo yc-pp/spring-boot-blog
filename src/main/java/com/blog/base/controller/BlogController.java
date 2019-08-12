@@ -1,13 +1,16 @@
 package com.blog.base.controller;
 
+import com.blog.base.entity.Article;
 import com.blog.base.service.ArticleService;
 import com.blog.base.service.TagService;
 import com.blog.base.util.PageResult;
+import com.blog.base.vo.BlogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,5 +54,26 @@ public class BlogController {
         request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
         request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
         return "admin/blog/index";
+    }
+    @GetMapping({"/tag/{tagTitle}"})
+    public String tag(HttpServletRequest request, @PathVariable("tagTitle") String tagTitle) {
+        return tag(request, tagTitle, 1);
+    }
+    @GetMapping({"/tag/{tagTitle}/{page}"})
+    public String tag(HttpServletRequest request, @PathVariable("tagTitle") String tagTitle, @PathVariable("page") Integer page) {
+        PageResult blogPageResult = articleService.getBlogsForTag(tagTitle,page);
+        request.setAttribute("pageUrl","tag/"+tagTitle+"/");
+        request.setAttribute("blogResultPage", blogPageResult);
+        request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
+        request.setAttribute("hotTagList",tagService.getHotTagList());
+        request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
+        request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
+        return "admin/blog/index";
+    }
+    @GetMapping({"/article/{oid}"})
+    public String blogDetail(HttpServletRequest request, @PathVariable("oid") Long oid) {
+        BlogVO blogVO=articleService.getBlogById(oid);
+        request.setAttribute("blogVO", blogVO);
+        return "admin/blog/blog-detail";
     }
 }

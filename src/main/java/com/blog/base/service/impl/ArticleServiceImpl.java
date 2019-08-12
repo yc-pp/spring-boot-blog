@@ -10,15 +10,16 @@ import com.blog.base.entity.Tag;
 import com.blog.base.entity.TagArticle;
 import com.blog.base.service.ArticleService;
 import com.blog.base.util.BootStrapTableList;
+import com.blog.base.util.MarkDownUtil;
 import com.blog.base.util.PageQueryUtil;
 import com.blog.base.util.PageResult;
+import com.blog.base.vo.BlogVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -165,5 +166,46 @@ public class ArticleServiceImpl implements ArticleService {
         int total = articleMapper.getTotalArticles(pageUtil);
         PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), page);
         return pageResult;
+    }
+
+    @Override
+    public PageResult getBlogsForTag(String tagTitle, int page) {
+        Tag tag=tagMapper.selectByTagTitle(tagTitle);
+        if(tag != null){
+            Map params = new HashMap();
+            params.put("page", (page - 1) * 5);
+            //每页8条
+            params.put("limit", 5);
+            params.put("tagOid", tag.getOid());
+            PageQueryUtil pageQueryUtil=new PageQueryUtil(params);
+            List<Article> articleList=articleMapper.getArticlesByTagTitle(pageQueryUtil);
+            int total=articleMapper.getTotalArtitlesByTagTitle(pageQueryUtil);
+            PageResult pageResult=new PageResult(articleList,total,pageQueryUtil.getLimit(),page);
+            return pageResult;
+        }
+        return null;
+    }
+
+    /**
+     * 查看文章详情
+     * @param oid
+     * @return
+     */
+    @Override
+    public BlogVO getBlogById(Long oid) {
+        Article article=articleMapper.selectByPrimaryKey(oid);
+        if(article!=null){
+            article.setArticleviewcount(article.getArticleviewcount()+1);
+            articleMapper.updateByPrimaryKey(article);
+            BlogVO blogVO=new BlogVO();
+            BeanUtils.copyProperties(article,blogVO);
+            blogVO.setArticlecontent(MarkDownUtil.mdToHtml(blogVO.getArticlecontent()));
+            if(!StringUtils.isEmpty(article.getArticletags())){
+                List<String> articleTags= Arrays.asList(article.getArticletags().split(","));
+                blogVO.setArticletags(articleTags);
+            }
+            return blogVO;
+        }
+        return null;
     }
 }

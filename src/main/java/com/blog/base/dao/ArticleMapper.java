@@ -26,4 +26,8 @@ public interface ArticleMapper {
     int getTotalArticles(PageQueryUtil pageUtil);
 
     List<Article> findArticleListByType(@Param("type") int type, @Param("limit") int limit);
+
+    List<Article> getArticlesByTagTitle(PageQueryUtil pageQueryUtil);
+
+    int getTotalArtitlesByTagTitle(PageQueryUtil pageQueryUtil);
 }
