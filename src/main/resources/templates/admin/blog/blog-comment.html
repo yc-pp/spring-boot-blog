@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/blog/blogCom::common-head"></header>
+<body class="lay-blog">
+<div th:replace="admin/blog/blogCom::common-header"></div>
+<div class="container-wrap">
+    <div class="container container-message container-details container-comment">
+        <div class="contar-wrap">
+            <div class="item">
+                <div class="item-box  layer-photos-demo1 layer-photos-demo">
+                    <h3><a th:href="@{'/admin/blog/article/'+${blogVO.oid}}">
+                        <th:block th:text="${blogVO.articletitle}"></th:block>
+                        文章标题</a></h3>
+                    <h5>
+                        <div class="tags">
+                            <th:block th:unless="${#lists.isEmpty(blogVO.articletags)}">
+                                <th:block th:each="tag : ${blogVO.articletags}">
+                                    <a th:href="@{'/admin/blog/tag/'+${tag}}" th:text="${tag}">文章标签</a>
+                                </th:block>
+                            </th:block>
+                        </div>
+                    </h5>
+                    <h5>发布于：<span th:text="${#dates.format(blogVO.articlecreated,'yyyy-MM-dd HH:mm:ss')}">发布时间</span></h5>
+                    <p><th:block th:utext="${blogVO.articlecontent}"/></p>
+                    <img src="../res/static/images/item.png" alt="">
+                    <div class="count layui-clear">
+                        <span class="pull-left">阅读 <em><th:block th:text="${blogVO.articleviewcount}"></th:block></em></span>
+                        <span class="pull-right like">评论 <em><th:block th:text="${blogVO.articlecommentcount}"></th:block></em></span>
+                    </div>
+                </div>
+            </div>
+            <form class="layui-form" action="">
+                <div class="layui-form-item layui-form-text">
+                    <textarea  class="layui-textarea"  style="resize:none" placeholder="写点什么啊"></textarea>
+                </div>
+                <div class="btnbox">
+                    <a href="details.html"  id="sure">
+                        确定
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/blog/blogCom::common-footer"></div>
+<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
+<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script>
+    layui.config({
+        base: '/static/admin/plugins/blog/js/'
+    }).use('blog');
+</script>
+</body>
+</html>
