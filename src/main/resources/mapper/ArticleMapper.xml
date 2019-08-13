@@ -260,7 +260,9 @@
     <include refid="Base_Column_List"/>,
     <include refid="Blob_Column_List" />
     from yc_article where articleStatus='1' and oid in (select article_oId from yc_tag_article where tag_oId =#{tagOid})
-    limit #{start},#{limit}
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
   </select>
   <select id="getTotalArtitlesByTagTitle" parameterType="Map" resultType="int">
     select count(*)

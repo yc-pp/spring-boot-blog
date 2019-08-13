@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -75,5 +74,26 @@ public class BlogController {
         BlogVO blogVO=articleService.getBlogById(oid);
         request.setAttribute("blogVO", blogVO);
         return "admin/blog/blog-detail";
+    }
+    @GetMapping({"/comment/{oid}"})
+    public String blogComment(HttpServletRequest request, @PathVariable("oid") Long oid) {
+        BlogVO blogVO=articleService.getBlogById(oid);
+        request.setAttribute("blogVO", blogVO);
+        return "admin/blog/blog-comment";
+    }
+    @GetMapping({"/search/{keyword}"})
+    public String search(HttpServletRequest request, @PathVariable("keyword") String keyword) {
+        return search(request, keyword, 1);
+    }
+    @GetMapping({"/search/{keyword}/{page}"})
+    public String search(HttpServletRequest request, @PathVariable("keyword") String keyword, @PathVariable("page") Integer page) {
+        PageResult blogPageResult = articleService.getBlogsForSearch(keyword,page);
+        request.setAttribute("pageUrl","search/"+keyword+"/");
+        request.setAttribute("blogResultPage", blogPageResult);
+        request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
+        request.setAttribute("hotTagList",tagService.getHotTagList());
+        request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
+        request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
+        return "admin/blog/index";
     }
 }

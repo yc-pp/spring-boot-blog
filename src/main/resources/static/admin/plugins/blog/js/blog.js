@@ -159,5 +159,11 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
 
 
   //输出test接口
-  exports('blog', {}); 
-});  
+  exports('blog', {});
+  $('#keywordSearch').on("click",function () {
+    var keyword = $('#keywordInput').val();
+    if (keyword && keyword != '') {
+      window.location.href = '/admin/blog/search/' + keyword;
+    }
+  });
+});

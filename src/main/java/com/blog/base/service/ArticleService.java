@@ -28,4 +28,6 @@ public interface ArticleService {
     PageResult getBlogsForTag(String tagTitle,int page);
 
     BlogVO getBlogById(Long oid);
+
+    PageResult getBlogsForSearch(String keyword,int page);
 }
