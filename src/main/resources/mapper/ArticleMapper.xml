@@ -268,4 +268,7 @@
     select count(*)
     from yc_article where articleStatus='1' and oid in (select article_oId from yc_tag_article where tag_oId =#{tagOid})
   </select>
+  <update id="updArticleComment">
+    update yc_article set articleCommentCount=articleCommentCount+1 where oId = #{oid,jdbcType=BIGINT}
+  </update>
 </mapper>

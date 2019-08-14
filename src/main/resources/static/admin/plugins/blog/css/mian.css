@@ -227,8 +227,8 @@ body{
 }
 .lay-blog .container-message .item-btn{margin-bottom: 50px;}
 .lay-blog .container-message .info-item{font-size:14px;margin-bottom:66px;}
-.lay-blog .container-message .info-img{cursor: pointer;float: left;padding-right:20px;}
-.lay-blog .container-message .info-text{padding-left:88px;}
+.lay-blog .container-message .info-img{cursor: pointer;float: left;padding-right:20px;width:50px}
+.lay-blog .container-message .info-text{padding-left:70px;}
 .lay-blog .container-message .title{overflow:hidden;margin-bottom:10px;}
 .lay-blog .container-message .title .name{float: left; display: block; line-height: 38px; color:#787878;}
 .info-intr{line-height: 24px;}
@@ -247,7 +247,7 @@ body{
 .lay-blog .container-details .comt{
 	padding:0 20px;
 	font-size: 18px;
-	margin-bottom:90px;
+	margin-bottom:40px;
 }
 .lay-blog .container-details .count{
 	margin-top:35px;

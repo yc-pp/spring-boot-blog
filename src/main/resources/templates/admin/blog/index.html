@@ -36,8 +36,9 @@
                             <img th:src="@{~/static/admin/plugins/blog/img/item.png}" alt="">
                         </div>
                         <div class="comment count">
-                            <a  href="javascript:;" th:text="'评论（'+${blog.articlecommentcount}+'）'">评论</a>
-                            <a href="javascript:;" class="like" th:text="'阅读量（'+${blog.articleviewcount}+'）'">点赞</a>
+                            <a  th:href="@{'/admin/blog/article/'+${blog.oid}}" th:text="'评论（'+${blog.articlecommentcount}+'）'">评论</a>
+                            <a th:href="@{'/admin/blog/article/'+${blog.oid}}" class="" th:text="'阅读量（'+${blog.articleviewcount}+'）'">阅读量</a>
+                            <!--<a href="javascript:;" class="like" th:text="'阅读量（'+${blog.articleviewcount}+'）'">阅读量</a>-->
                         </div>
                     </div>
                 </th:block>

@@ -9,16 +9,32 @@
     <result column="commentOnId" jdbcType="BIGINT" property="commentonid" />
     <result column="commentSharpURL" jdbcType="VARCHAR" property="commentsharpurl" />
     <result column="commentThumbnailURL" jdbcType="VARCHAR" property="commentthumbnailurl" />
+    <result column="commentStatus" jdbcType="TINYINT" property="commentstatus" />
     <result column="commentURL" jdbcType="VARCHAR" property="commenturl" />
-    <result column="commentOriginalCommentId" jdbcType="VARCHAR" property="commentoriginalcommentid" />
-    <result column="commentOriginalCommentName" jdbcType="VARCHAR" property="commentoriginalcommentname" />
+    <result column="replyContent" jdbcType="VARCHAR" property="replycontent" />
+    <result column="replyCreated" jdbcType="TIMESTAMP" property="replycreated" />
+  </resultMap>
+  <resultMap id="BaseResultMapVO" type="com.blog.base.vo.CommentVO">
+    <id column="oId" jdbcType="BIGINT" property="oid" />
+    <result column="commentContent" jdbcType="VARCHAR" property="commentcontent" />
+    <result column="commentCreated" jdbcType="TIMESTAMP" property="commentcreated" />
+    <result column="commentName" jdbcType="VARCHAR" property="commentname" />
+    <result column="commentOnId" jdbcType="BIGINT" property="commentonid" />
+    <result column="articleTitle" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="commentSharpURL" jdbcType="VARCHAR" property="commentsharpurl" />
+    <result column="commentThumbnailURL" jdbcType="VARCHAR" property="commentthumbnailurl" />
+    <result column="commentStatus" jdbcType="TINYINT" property="commentstatus" />
+    <result column="commentURL" jdbcType="VARCHAR" property="commenturl" />
+    <result column="replyContent" jdbcType="VARCHAR" property="replycontent" />
+    <result column="replyCreated" jdbcType="TIMESTAMP" property="replycreated" />
   </resultMap>
   <sql id="Base_Column_List">
-    oId, commentContent, commentCreated, commentName, commentOnId, commentSharpURL, commentThumbnailURL, 
-    commentURL, commentOriginalCommentId, commentOriginalCommentName
+    oId, commentContent, commentCreated, commentName, commentOnId, commentSharpURL, commentThumbnailURL,
+    commentStatus, commentURL, replyContent, replyCreated
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from yc_comment
     where oId = #{oid,jdbcType=BIGINT}
@@ -31,14 +47,14 @@
     <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into yc_comment (commentContent, commentCreated, 
-      commentName, commentOnId, commentSharpURL, 
-      commentThumbnailURL, commentURL, commentOriginalCommentId, 
-      commentOriginalCommentName)
-    values (#{commentcontent,jdbcType=VARCHAR}, #{commentcreated,jdbcType=TIMESTAMP}, 
-      #{commentname,jdbcType=VARCHAR}, #{commentonid,jdbcType=BIGINT}, #{commentsharpurl,jdbcType=VARCHAR}, 
-      #{commentthumbnailurl,jdbcType=VARCHAR}, #{commenturl,jdbcType=VARCHAR}, #{commentoriginalcommentid,jdbcType=VARCHAR}, 
-      #{commentoriginalcommentname,jdbcType=VARCHAR})
+    insert into yc_comment (commentContent, commentCreated,
+    commentName, commentOnId, commentSharpURL,
+    commentThumbnailURL, commentStatus, commentURL,
+    replyContent, replyCreated)
+    values (#{commentcontent,jdbcType=VARCHAR}, #{commentcreated,jdbcType=TIMESTAMP},
+    #{commentname,jdbcType=VARCHAR}, #{commentonid,jdbcType=BIGINT}, #{commentsharpurl,jdbcType=VARCHAR},
+    #{commentthumbnailurl,jdbcType=VARCHAR}, #{commentstatus,jdbcType=TINYINT}, #{commenturl,jdbcType=VARCHAR},
+    #{replycontent,jdbcType=VARCHAR}, #{replycreated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.blog.base.entity.Comment">
     <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Long">
@@ -64,14 +80,17 @@
       <if test="commentthumbnailurl != null">
         commentThumbnailURL,
       </if>
+      <if test="commentstatus != null">
+        commentStatus,
+      </if>
       <if test="commenturl != null">
         commentURL,
       </if>
-      <if test="commentoriginalcommentid != null">
-        commentOriginalCommentId,
+      <if test="replycontent != null">
+        replyContent,
       </if>
-      <if test="commentoriginalcommentname != null">
-        commentOriginalCommentName,
+      <if test="replycreated != null">
+        replyCreated,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -93,14 +112,17 @@
       <if test="commentthumbnailurl != null">
         #{commentthumbnailurl,jdbcType=VARCHAR},
       </if>
+      <if test="commentstatus != null">
+        #{commentstatus,jdbcType=TINYINT},
+      </if>
       <if test="commenturl != null">
         #{commenturl,jdbcType=VARCHAR},
       </if>
-      <if test="commentoriginalcommentid != null">
-        #{commentoriginalcommentid,jdbcType=VARCHAR},
+      <if test="replycontent != null">
+        #{replycontent,jdbcType=VARCHAR},
       </if>
-      <if test="commentoriginalcommentname != null">
-        #{commentoriginalcommentname,jdbcType=VARCHAR},
+      <if test="replycreated != null">
+        #{replycreated,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -125,14 +147,17 @@
       <if test="commentthumbnailurl != null">
         commentThumbnailURL = #{commentthumbnailurl,jdbcType=VARCHAR},
       </if>
+      <if test="commentstatus != null">
+        commentStatus = #{commentstatus,jdbcType=TINYINT},
+      </if>
       <if test="commenturl != null">
         commentURL = #{commenturl,jdbcType=VARCHAR},
       </if>
-      <if test="commentoriginalcommentid != null">
-        commentOriginalCommentId = #{commentoriginalcommentid,jdbcType=VARCHAR},
+      <if test="replycontent != null">
+        replyContent = #{replycontent,jdbcType=VARCHAR},
       </if>
-      <if test="commentoriginalcommentname != null">
-        commentOriginalCommentName = #{commentoriginalcommentname,jdbcType=VARCHAR},
+      <if test="replycreated != null">
+        replyCreated = #{replycreated,jdbcType=TIMESTAMP},
       </if>
     </set>
     where oId = #{oid,jdbcType=BIGINT}
@@ -145,9 +170,31 @@
       commentOnId = #{commentonid,jdbcType=BIGINT},
       commentSharpURL = #{commentsharpurl,jdbcType=VARCHAR},
       commentThumbnailURL = #{commentthumbnailurl,jdbcType=VARCHAR},
+      commentStatus = #{commentstatus,jdbcType=TINYINT},
       commentURL = #{commenturl,jdbcType=VARCHAR},
-      commentOriginalCommentId = #{commentoriginalcommentid,jdbcType=VARCHAR},
-      commentOriginalCommentName = #{commentoriginalcommentname,jdbcType=VARCHAR}
+      replyContent = #{replycontent,jdbcType=VARCHAR},
+      replyCreated = #{replycreated,jdbcType=TIMESTAMP}
     where oId = #{oid,jdbcType=BIGINT}
   </update>
+  <select id="findCommentList" parameterType="Map" resultMap="BaseResultMapVO">
+    select
+    ycc.*,yca.articleTitle
+    from yc_comment ycc left join yc_article yca on ycc.commentOnId=yca.oid
+    order by ycc.oId desc
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
+  <select id="getTotalComments" parameterType="Map" resultType="int">
+    select count(*)  from yc_comment
+  </select>
+  <update id="updCommentStatus">
+    update yc_comment set commentStatus='1' where oId = #{oid,jdbcType=BIGINT}
+  </update>
+  <select id="getCommentByBlogId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from yc_comment where commentStatus='1' and commentOnId= #{blogId,jdbcType=BIGINT}
+    order by oId desc
+  </select>
 </mapper>

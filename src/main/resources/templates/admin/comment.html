@@ -28,67 +28,6 @@
     </div>
     <!--foot脚区域-->
     <div th:replace="admin/common::common-foot"></div>
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">分类添加</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="categoryForm">
-                        <div class="form-group">
-                            <div class="alert alert-danger" id="edit-error-msg" style="display: none;">
-                                错误信息展示栏。
-                            </div>
-                        </div>
-                        <input type="hidden" class="form-control" id="categoryOid" name="categoryOid">
-                        <div class="form-group">
-                            <label for="categoryTitle" class="control-label">分类名称:</label>
-                            <input type="text" class="form-control" id="categoryTitle" name="categoryTitle"
-                                   placeholder="请输入分类名称" required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="categoryDescription" class="control-label">分类描述:</label>
-                            <input type="text" class="form-control" id="categoryDescription" name="categoryDescription"
-                                   placeholder="请输入分类描述" required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="categoryURI" class="control-label">分类图标:</label>
-                            <select class='form-control select2 image-picker' id="categoryURI"
-                                    name="categoryURI">
-                                <option data-img-src='/static/admin/plugins/img/00.png' value="/static/admin/plugins/img/00.png"> 默认图标</option>
-                                <option data-img-src='/static/admin/plugins/img/01.png' value='/static/admin/plugins/img/01.png'> 图标1</option>
-                                <option data-img-src='/static/admin/plugins/img/02.png' value='/static/admin/plugins/img/02.png'> 图标2</option>
-                                <option data-img-src='/static/admin/plugins/img/03.png' value='/static/admin/plugins/img/03.png'> 图标3</option>
-                                <option data-img-src='/static/admin/plugins/img/04.png' value='/static/admin/plugins/img/04.png'> 图标4</option>
-                                <option data-img-src='/static/admin/plugins/img/05.png' value='/static/admin/plugins/img/05.png'> 图标5</option>
-                                <option data-img-src='/static/admin/plugins/img/06.png' value='/static/admin/plugins/img/06.png'> 图标6</option>
-                                <option data-img-src='/static/admin/plugins/img/07.png' value='/static/admin/plugins/img/07.png'> 图标7</option>
-                                <option data-img-src='/static/admin/plugins/img/08.png' value='/static/admin/plugins/img/08.png'> 图标8</option>
-                                <option data-img-src='/static/admin/plugins/img/09.png' value='/static/admin/plugins/img/09.png'> 图标9</option>
-                                <option data-img-src='/static/admin/plugins/img/10.png' value='/static/admin/plugins/img/10.png'> 图标10</option>
-                                <option data-img-src='/static/admin/plugins/img/11.png' value='/static/admin/plugins/img/11.png'> 图标11</option>
-                                <option data-img-src='/static/admin/plugins/img/12.png' value='/static/admin/plugins/img/12.png'> 图标12</option>
-                                <option data-img-src='/static/admin/plugins/img/13.png' value='/static/admin/plugins/img/13.png'> 图标13</option>
-                                <option data-img-src='/static/admin/plugins/img/14.png' value='/static/admin/plugins/img/14.png'> 图标14</option>
-                                <option data-img-src='/static/admin/plugins/img/15.png' value='/static/admin/plugins/img/15.png'> 图标15</option>
-                                <option data-img-src='/static/admin/plugins/img/16.png' value='/static/admin/plugins/img/16.png'> 图标16</option>
-                                <option data-img-src='/static/admin/plugins/img/17.png' value='/static/admin/plugins/img/17.png'> 图标17</option>
-                                <option data-img-src='/static/admin/plugins/img/18.png' value='/static/admin/plugins/img/18.png'> 图标18</option>
-                                <option data-img-src='/static/admin/plugins/img/19.png' value='/static/admin/plugins/img/19.png'> 图标19</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="saveButton">保存</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
 </div>
 <script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
 <script th:src="@{~/static/admin/plugins/bootstrap/js/bootstrap.min.js}"></script>
@@ -98,6 +37,6 @@
 <script th:src="@{~/static/admin/plugins/sweetalert/js/sweetalert.min.js}"></script>
 <script th:src="@{~/static/admin/plugins/js/menu.js}"></script>
 <script th:src="@{~/static/admin/plugins/js/util.js}"></script>
-<script th:src="@{~/static/admin/plugins/js/category.js}"></script>
+<script th:src="@{~/static/admin/plugins/js/comment.js}"></script>
 </body>
 </html>

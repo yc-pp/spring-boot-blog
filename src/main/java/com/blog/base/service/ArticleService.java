@@ -27,7 +27,9 @@ public interface ArticleService {
 
     PageResult getBlogsForTag(String tagTitle,int page);
 
-    BlogVO getBlogById(Long oid);
+    BlogVO getBlogById(Long oid,String type);
 
     PageResult getBlogsForSearch(String keyword,int page);
+
+    Boolean updArticleCommentById(String name,Long oid,String comment);
 }

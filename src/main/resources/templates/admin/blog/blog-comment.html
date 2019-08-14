@@ -30,11 +30,12 @@
                 </div>
             </div>
             <form class="layui-form" action="">
+                <input type="hidden" class="form-control" th:value="${blogVO.oid}" id="blogId" name="blogId">
                 <div class="layui-form-item layui-form-text">
-                    <textarea  class="layui-textarea"  style="resize:none" placeholder="写点什么啊"></textarea>
+                    <textarea  class="layui-textarea" id="layui-textarea" style="resize:none" placeholder="写点什么啊"></textarea>
                 </div>
                 <div class="btnbox">
-                    <a href="details.html"  id="sure">
+                    <a href="javascript:;"  id="sure">
                         确定
                     </a>
                 </div>
@@ -45,6 +46,7 @@
 <div th:replace="admin/blog/blogCom::common-footer"></div>
 <script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
 <script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{~/static/admin/plugins/sweetalert/js/sweetalert.min.js}"></script>
 <script>
     layui.config({
         base: '/static/admin/plugins/blog/js/'

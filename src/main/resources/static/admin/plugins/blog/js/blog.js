@@ -160,10 +160,39 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
 
   //输出test接口
   exports('blog', {});
+
   $('#keywordSearch').on("click",function () {
     var keyword = $('#keywordInput').val();
     if (keyword && keyword != '') {
       window.location.href = '/admin/blog/search/' + keyword;
     }
+  });
+
+  $('#sure').on("click",function () {
+    var blogId=$('#blogId').val();
+    var comment=$("#layui-textarea").val();
+    $.ajax({
+      type: 'POST',//方法类型
+      url: '/admin/blog/article/comment',
+      data: {"oid": blogId,"comment" : comment},
+      success: function (result) {
+        if(result.resultCode =='000000'){
+          swal("评论成功",{
+            icon:"success",
+          }).then(function () {
+            window.location.href="/admin/blog/article/"+blogId;
+          });
+        }else {
+          swal("评论失败",{
+            icon:"error",
+          });
+        }
+      },
+      error: function () {
+        swal("评论失败",{
+          icon:"error",
+        });
+      }
+    });
   });
 });

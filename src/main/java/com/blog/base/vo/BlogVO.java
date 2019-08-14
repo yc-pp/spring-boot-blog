@@ -1,5 +1,6 @@
 package com.blog.base.vo;
 
+import com.blog.base.entity.Comment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -17,6 +18,8 @@ public class BlogVO {
     private String articlecategoryname;
 
     private List<String> articletags;
+
+    private List<Comment> comments;
 
     private Long articleauthorid;
 
@@ -82,6 +85,14 @@ public class BlogVO {
 
     public void setArticletags(List<String> articletags) {
         this.articletags = articletags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Long getArticleauthorid() {
@@ -165,6 +176,7 @@ public class BlogVO {
         sb.append(", articlecategoryid=").append(articlecategoryid);
         sb.append(", articlecategoryname='").append(articlecategoryname).append('\'');
         sb.append(", articletags=").append(articletags);
+        sb.append(", comments=").append(comments);
         sb.append(", articleauthorid=").append(articleauthorid);
         sb.append(", articlestatus=").append(articlestatus);
         sb.append(", articleviewcount=").append(articleviewcount);

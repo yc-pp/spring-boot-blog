@@ -4,12 +4,12 @@ import com.blog.base.entity.Article;
 import com.blog.base.service.ArticleService;
 import com.blog.base.service.TagService;
 import com.blog.base.util.PageResult;
+import com.blog.base.util.Result;
+import com.blog.base.util.ResultGenerator;
 import com.blog.base.vo.BlogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,15 +71,26 @@ public class BlogController {
     }
     @GetMapping({"/article/{oid}"})
     public String blogDetail(HttpServletRequest request, @PathVariable("oid") Long oid) {
-        BlogVO blogVO=articleService.getBlogById(oid);
+        BlogVO blogVO=articleService.getBlogById(oid,"0");
         request.setAttribute("blogVO", blogVO);
+        request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         return "admin/blog/blog-detail";
     }
     @GetMapping({"/comment/{oid}"})
     public String blogComment(HttpServletRequest request, @PathVariable("oid") Long oid) {
-        BlogVO blogVO=articleService.getBlogById(oid);
+        BlogVO blogVO=articleService.getBlogById(oid,"1");
         request.setAttribute("blogVO", blogVO);
         return "admin/blog/blog-comment";
+    }
+    @RequestMapping({"/article/comment"})
+    @ResponseBody
+    public Result blogComment(HttpServletRequest request, @RequestParam("oid") Long oid,
+                              @RequestParam("comment") String comment) {
+
+        if(articleService.updArticleCommentById((String)(request.getSession().getAttribute("loginNickName")),oid,comment)){
+            return ResultGenerator.genSuccessResult();
+        }
+        return ResultGenerator.genFailResult("评论失败！");
     }
     @GetMapping({"/search/{keyword}"})
     public String search(HttpServletRequest request, @PathVariable("keyword") String keyword) {

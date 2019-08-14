@@ -32,33 +32,40 @@ $(function () {
         idField: "oId",//指定主键列
         columns: [
             {
-                title: '网站名称',
-                field: 'linktitle',//可以直接取到属性里面的属性，赞
+                title: '评论文章',
+                field: 'blogTitle',//可以直接取到属性里面的属性，赞
                 align: 'center',
-                width:  '15%'
+                width:  '20%'
             },
             {
-                title: '网站描述',
-                field: 'linkdescription',//可以直接取到属性里面的属性，赞
+                title: '评论内容',
+                field: 'commentcontent',//可以直接取到属性里面的属性，赞
                 align: 'center',
-                width:  '15%'
+                width:  '20%'
             },
             {
-                //部门名字
-                title: '网站链接',
-                field: 'linkaddress',//可以直接取到属性里面的属性，赞
+                title: '评论人',
+                field: 'commentname',//可以直接取到属性里面的属性，赞
                 align: 'center',
-                width:  '25%'
+                width:  '10%'
             },
             {
-                title: '排序值',
-                field: 'linkorder',//可以直接取到属性里面的属性，赞
+                title: '评论状态',
+                field: 'commentstatus',//可以直接取到属性里面的属性，赞
                 align: 'center',
-                width:  '5%'
+                width:  '10%',
+                formatter: function (value, row, index) {//自定义显示可以写标签哦~
+                    if(row.commentstatus==0){
+                        return '<button type="buttton"  class="btn btn-info" disabled="disabled">未审核</button>';
+                    }else {
+                        return '<button type="buttton" class="btn btn-success" disabled="disabled">已审核</button>';
+
+                    }
+                }
             },
             {
-                title: '添加时间',
-                field: 'createdate',
+                title: '评论时间',
+                field: 'commentcreated',
                 align: 'center',
                 width:  '20%'
             },
@@ -68,7 +75,7 @@ $(function () {
                 align: 'center',
                 width:  '20%',
                 formatter: function (value, row, index) {//自定义显示可以写标签哦~
-                    return '<button type="buttton" class="btn btn-info" onclick="edit(\'' + row.oid + '\')">修改</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="buttton" class="btn btn-danger" onclick="del(\'' + row.oid + '\')">删除</button> ';
+                    return '<button type="buttton" class="btn btn-info" onclick="edit(\'' + row.oid + '\')">审核</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="buttton" class="btn btn-danger" onclick="del(\'' + row.oid + '\')">删除</button> ';
                 }
             }
 
@@ -84,29 +91,25 @@ $(function () {
 
 });
 function edit(oid) {
-    $('#edit-error-msg').css("display", "none");
-    document.getElementById("linkForm").reset();
     $.ajax({
         type: 'POST',//方法类型
-        url: '/admin/link/detail',
+        url: '/admin/comment/updComment',
         data: {"oid": oid},
         success: function (result) {
-            if(result.resultCode =='000000' && result.data != null){
-                $("#linkOid").val(result.data.oid);
-                $("#linkTitle").val(result.data.linktitle);
-                $("#linkDescription").val(result.data.linkdescription);
-                $("#linkAddress").val(result.data.linkaddress);
-                $("#linkOrder").val(result.data.linkorder);
-                $('.modal-title').html('友链修改');
-                $('#myModal').modal('show');
+            if(result.resultCode =='000000'){
+                swal("评论成功",{
+                    icon:"success",
+                }).then(function () {
+                    $('#table_tagList').bootstrapTable('refresh');
+                });
             }else {
-                swal("查询明细失败",{
+                swal("审核失败",{
                     icon:"error",
                 });
             }
         },
         error: function () {
-            swal("查询明细失败",{
+            swal("审核失败",{
                 icon:"error",
             });
         }
@@ -123,7 +126,7 @@ function del(oid) {
         if(inputValue) {
             $.ajax({
                 type: 'POST',//方法类型
-                url: '/admin/link/del',
+                url: '/admin/comment/del',
                 data: {"oid": oid},
                 success: function (result) {
                     if(result.resultCode =='000000'){
@@ -146,73 +149,4 @@ function del(oid) {
             });
         }
     })
-}
-
-//绑定modal上的保存按钮
-$('#saveButton').click(function () {
-    var linkTitle = $("#linkTitle").val();
-    var linkDescription = $("#linkDescription").val();
-    var linkAddress = $("#linkAddress").val();
-    var linkOrder = $("#linkOrder").val();
-    if (!validCN_ENString2_18(linkTitle)) {
-        $('#edit-error-msg').css("display", "block");
-        $('#edit-error-msg').html("请输入符合规范的名称！");
-        return;
-    }
-    if (!isURL(linkAddress)) {
-        $('#edit-error-msg').css("display", "block");
-        $('#edit-error-msg').html("请输入符合规范的网址！");
-        return;
-    }
-    if (!validCN_ENString2_100(linkDescription)) {
-        $('#edit-error-msg').css("display", "block");
-        $('#edit-error-msg').html("请输入符合规范的描述！");
-        return;
-    }
-    if (isNull(linkOrder) || linkOrder < 0) {
-        $('#edit-error-msg').css("display", "block");
-        $('#edit-error-msg').html("请输入符合规范的排序值！");
-        return;
-    }
-    var params = $("#linkForm").serialize();
-    var linkOid=$("#linkOid").val();
-    var url='/admin/link/save';
-    if(linkOid != null && linkOid > 0){
-        url='/admin/link/update';
-    }
-    $.ajax({
-        type: 'POST',//方法类型
-        url: url,
-        data: params,
-        success: function (result) {
-            $('#myModal').modal('hide');
-            document.getElementById("linkForm").reset();
-            if(result.resultCode =='000000'){
-                swal("保存成功",{
-                    icon:"success",
-                });
-                $('#table_tagList').bootstrapTable('refresh');
-            }else {
-                swal(result.message, {
-                    icon: "error",
-                });
-            }
-        },
-        error: function () {
-            $('#myModal').modal('hide');
-            swal("保存失败",{
-                icon:"error",
-            });
-            document.getElementById("linkForm").reset();
-            $('#table_tagList').bootstrapTable('refresh');
-        }
-    });
-
-});
-function linkAdd() {
-    $('#edit-error-msg').css("display", "none");
-    $("#linkOid").val('');
-    document.getElementById("linkForm").reset();
-    $('.modal-title').html('友链添加');
-    $('#myModal').modal('show');
 }

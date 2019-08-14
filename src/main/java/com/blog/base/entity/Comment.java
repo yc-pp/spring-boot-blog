@@ -20,11 +20,13 @@ public class Comment implements Serializable {
 
     private String commentthumbnailurl;
 
+    private Byte commentstatus;
+
     private String commenturl;
 
-    private String commentoriginalcommentid;
-
-    private String commentoriginalcommentname;
+    private String replycontent;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date replycreated;
 
     private static final long serialVersionUID = 1L;
 
@@ -84,6 +86,14 @@ public class Comment implements Serializable {
         this.commentthumbnailurl = commentthumbnailurl == null ? null : commentthumbnailurl.trim();
     }
 
+    public Byte getCommentstatus() {
+        return commentstatus;
+    }
+
+    public void setCommentstatus(Byte commentstatus) {
+        this.commentstatus = commentstatus;
+    }
+
     public String getCommenturl() {
         return commenturl;
     }
@@ -92,20 +102,20 @@ public class Comment implements Serializable {
         this.commenturl = commenturl == null ? null : commenturl.trim();
     }
 
-    public String getCommentoriginalcommentid() {
-        return commentoriginalcommentid;
+    public String getReplycontent() {
+        return replycontent;
     }
 
-    public void setCommentoriginalcommentid(String commentoriginalcommentid) {
-        this.commentoriginalcommentid = commentoriginalcommentid == null ? null : commentoriginalcommentid.trim();
+    public void setReplycontent(String replycontent) {
+        this.replycontent = replycontent == null ? null : replycontent.trim();
     }
 
-    public String getCommentoriginalcommentname() {
-        return commentoriginalcommentname;
+    public Date getReplycreated() {
+        return replycreated;
     }
 
-    public void setCommentoriginalcommentname(String commentoriginalcommentname) {
-        this.commentoriginalcommentname = commentoriginalcommentname == null ? null : commentoriginalcommentname.trim();
+    public void setReplycreated(Date replycreated) {
+        this.replycreated = replycreated;
     }
 
     @Override
@@ -121,9 +131,10 @@ public class Comment implements Serializable {
         sb.append(", commentonid=").append(commentonid);
         sb.append(", commentsharpurl=").append(commentsharpurl);
         sb.append(", commentthumbnailurl=").append(commentthumbnailurl);
+        sb.append(", commentstatus=").append(commentstatus);
         sb.append(", commenturl=").append(commenturl);
-        sb.append(", commentoriginalcommentid=").append(commentoriginalcommentid);
-        sb.append(", commentoriginalcommentname=").append(commentoriginalcommentname);
+        sb.append(", replycontent=").append(replycontent);
+        sb.append(", replycreated=").append(replycreated);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

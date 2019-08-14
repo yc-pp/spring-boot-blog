@@ -30,4 +30,6 @@ public interface ArticleMapper {
     List<Article> getArticlesByTagTitle(PageQueryUtil pageQueryUtil);
 
     int getTotalArtitlesByTagTitle(PageQueryUtil pageQueryUtil);
+
+    int updArticleComment(Long oid);
 }

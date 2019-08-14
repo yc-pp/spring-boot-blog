@@ -1,13 +1,7 @@
 package com.blog.base.service.impl;
 
-import com.blog.base.dao.ArticleMapper;
-import com.blog.base.dao.CategoryMapper;
-import com.blog.base.dao.TagArticleMapper;
-import com.blog.base.dao.TagMapper;
-import com.blog.base.entity.Article;
-import com.blog.base.entity.Category;
-import com.blog.base.entity.Tag;
-import com.blog.base.entity.TagArticle;
+import com.blog.base.dao.*;
+import com.blog.base.entity.*;
 import com.blog.base.service.ArticleService;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.MarkDownUtil;
@@ -31,6 +25,8 @@ public class ArticleServiceImpl implements ArticleService {
     private CategoryMapper categoryMapper;
     @Autowired
     private TagMapper tagMapper;
+    @Autowired
+    private CommentMapper commentMapper;
     @Override
     public BootStrapTableList getArticlePage(PageQueryUtil pageUtil) {
         List<Article> articles = articleMapper.findArticleList(pageUtil);
@@ -192,7 +188,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public BlogVO getBlogById(Long oid) {
+    public BlogVO getBlogById(Long oid,String type) {
         Article article=articleMapper.selectByPrimaryKey(oid);
         if(article!=null){
             article.setArticleviewcount(article.getArticleviewcount()+1);
@@ -203,6 +199,10 @@ public class ArticleServiceImpl implements ArticleService {
             if(!StringUtils.isEmpty(article.getArticletags())){
                 List<String> articleTags= Arrays.asList(article.getArticletags().split(","));
                 blogVO.setArticletags(articleTags);
+            }
+            if("0".equals(type)){
+                List<Comment> comments=commentMapper.getCommentByBlogId(oid);
+                blogVO.setComments(comments);
             }
             return blogVO;
         }
@@ -222,5 +222,19 @@ public class ArticleServiceImpl implements ArticleService {
         int total = articleMapper.getTotalArticles(pageUtil);
         PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), page);
         return pageResult;
+    }
+
+    @Override
+    public Boolean updArticleCommentById(String name,Long oid, String comment) {
+        Comment comment1=new Comment();
+        comment1.setCommentname(name);
+        comment1.setCommentcontent(comment);
+        comment1.setCommentcreated(new Date());
+        comment1.setCommentstatus((byte)0);
+        comment1.setCommentonid(oid);
+        if(commentMapper.insertSelective(comment1) > 0){
+            return  articleMapper.updArticleComment(oid) > 0;
+        }
+        return false;
     }
 }
