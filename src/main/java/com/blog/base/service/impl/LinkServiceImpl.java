@@ -40,4 +40,9 @@ public class LinkServiceImpl implements LinkService {
     public Boolean updateLink(Link link) {
         return linkMapper.updateByPrimaryKeySelective(link) > 0;
     }
+
+    @Override
+    public List<Link> queryLinks() {
+        return linkMapper.queryLinks();
+    }
 }

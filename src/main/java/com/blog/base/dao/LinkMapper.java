@@ -22,4 +22,6 @@ public interface LinkMapper {
     List<Link> findLinkList(PageQueryUtil pageUtil);
 
     int getTotalLinks(PageQueryUtil pageUtil);
+
+    List<Link> queryLinks();
 }

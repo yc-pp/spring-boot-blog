@@ -29,9 +29,9 @@
         </form>
         <div class="blog-nav pull-right">
             <ul class="layui-nav pull-left">
-                <li class="layui-nav-item layui-this"><a th:href="@{/admin/blog/index}">首页</a></li>
-                <li class="layui-nav-item"><a href="message.html">留言</a></li>
-                <li class="layui-nav-item"><a href="about.html">关于</a></li>
+                <li th:class="${index_}=='index'?'layui-nav-item layui-this':layui-nav-item"><a th:href="@{/admin/blog/index}">首页</a></li>
+                <li th:class="${index_}=='link'?'layui-nav-item layui-this':layui-nav-item"><a th:href="@{/admin/blog/link}">友链</a></li>
+                <li class="layui-nav-item"><a href="https://github.com/yc-pp">GitHub</a></li>
             </ul>
             <a href="#" class="personal pull-left">
                 <i class="layui-icon layui-icon-username"></i>
@@ -45,16 +45,16 @@
     </div>
     <ul class="pop-nav" id="pop-nav" >
         <li><a th:href="@{/admin/blog/index}">首页</a></li>
-        <li><a href="message.html">留言</a></li>
-        <li><a href="about.html">关于</a></li>
+        <li><a th:href="@{/admin/blog/link}">友链</a></li>
+        <li><a href="https://github.com/yc-pp">GitHub</a></li>
     </ul>
 </div>
 <!--公共foot区域-->
 <div class="footer" th:fragment="common-footer">
     <p>
-        <span>&copy; 2018</span>
+        <span>&copy; 2019</span>
         <span><a href="http://www.layui.com" target="_blank">layui.com</a></span>
-        <span>MIT license</span>
+        <span>娃哈哈</span>
     </p>
     <p><span>人生就是一场修行</span></p>
 </div>

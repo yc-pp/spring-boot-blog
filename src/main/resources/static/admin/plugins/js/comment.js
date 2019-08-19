@@ -97,7 +97,7 @@ function edit(oid) {
         data: {"oid": oid},
         success: function (result) {
             if(result.resultCode =='000000'){
-                swal("评论成功",{
+                swal("审核成功",{
                     icon:"success",
                 }).then(function () {
                     $('#table_tagList').bootstrapTable('refresh');

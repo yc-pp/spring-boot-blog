@@ -4,6 +4,8 @@ import com.blog.base.entity.Link;
 import com.blog.base.util.BootStrapTableList;
 import com.blog.base.util.PageQueryUtil;
 
+import java.util.List;
+
 public interface LinkService {
     BootStrapTableList getLinkPage(PageQueryUtil pageUtil);
 
@@ -14,4 +16,6 @@ public interface LinkService {
     Link queryLinkDetail(Long oid);
 
     Boolean updateLink(Link link);
+
+    List<Link> queryLinks();
 }

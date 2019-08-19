@@ -113,4 +113,9 @@
   <select id="getTotalLinks" parameterType="Map" resultType="int">
     select count(*)  from yc_link
   </select>
+  <select id="queryLinks" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from yc_link order by linkOrder desc limit 0,5
+  </select>
 </mapper>

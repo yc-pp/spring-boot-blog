@@ -1,7 +1,8 @@
 package com.blog.base.controller;
 
-import com.blog.base.entity.Article;
+import com.blog.base.entity.Link;
 import com.blog.base.service.ArticleService;
+import com.blog.base.service.LinkService;
 import com.blog.base.service.TagService;
 import com.blog.base.util.PageResult;
 import com.blog.base.util.Result;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/blog")
@@ -20,6 +22,8 @@ public class BlogController {
     private ArticleService articleService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private LinkService linkService;
     @GetMapping("/index")
     public String index(HttpServletRequest request) {
         return this.page(request, 1);
@@ -31,6 +35,7 @@ public class BlogController {
             return "admin/error/error_404.html";
         }
         request.setAttribute("pageUrl","page/");
+        request.setAttribute("index_","index");
         request.setAttribute("blogResultPage", blogResultPage);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         request.setAttribute("hotTagList",tagService.getHotTagList());
@@ -46,6 +51,7 @@ public class BlogController {
     @GetMapping({"/category/{articlecategoryid}/{page}"})
     public String category(HttpServletRequest request, @PathVariable("articlecategoryid") String articlecategoryid, @PathVariable("page") Integer page) {
         PageResult blogPageResult = articleService.getBlogsForCategory(articlecategoryid,page);
+        request.setAttribute("index_","index");
         request.setAttribute("pageUrl","category/"+articlecategoryid+"/");
         request.setAttribute("blogResultPage", blogPageResult);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
@@ -61,6 +67,7 @@ public class BlogController {
     @GetMapping({"/tag/{tagTitle}/{page}"})
     public String tag(HttpServletRequest request, @PathVariable("tagTitle") String tagTitle, @PathVariable("page") Integer page) {
         PageResult blogPageResult = articleService.getBlogsForTag(tagTitle,page);
+        request.setAttribute("index_","index");
         request.setAttribute("pageUrl","tag/"+tagTitle+"/");
         request.setAttribute("blogResultPage", blogPageResult);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
@@ -72,6 +79,7 @@ public class BlogController {
     @GetMapping({"/article/{oid}"})
     public String blogDetail(HttpServletRequest request, @PathVariable("oid") Long oid) {
         BlogVO blogVO=articleService.getBlogById(oid,"0");
+        request.setAttribute("index_","index");
         request.setAttribute("blogVO", blogVO);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
         return "admin/blog/blog-detail";
@@ -80,6 +88,7 @@ public class BlogController {
     public String blogComment(HttpServletRequest request, @PathVariable("oid") Long oid) {
         BlogVO blogVO=articleService.getBlogById(oid,"1");
         request.setAttribute("blogVO", blogVO);
+        request.setAttribute("index_","index");
         return "admin/blog/blog-comment";
     }
     @RequestMapping({"/article/comment"})
@@ -99,6 +108,7 @@ public class BlogController {
     @GetMapping({"/search/{keyword}/{page}"})
     public String search(HttpServletRequest request, @PathVariable("keyword") String keyword, @PathVariable("page") Integer page) {
         PageResult blogPageResult = articleService.getBlogsForSearch(keyword,page);
+        request.setAttribute("index_","index");
         request.setAttribute("pageUrl","search/"+keyword+"/");
         request.setAttribute("blogResultPage", blogPageResult);
         request.setAttribute("name",request.getSession().getAttribute("loginNickName"));
@@ -106,5 +116,12 @@ public class BlogController {
         request.setAttribute("newArticleList",articleService.getBlogListForIndexPage(1));
         request.setAttribute("hotArticleList",articleService.getBlogListForIndexPage(0));
         return "admin/blog/index";
+    }
+    @GetMapping("/link")
+    public String links(HttpServletRequest request){
+        List<Link> linkList = linkService.queryLinks();
+        request.setAttribute("links",linkList);
+        request.setAttribute("index_","link");
+        return "admin/blog/blog-link";
     }
 }
