@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/blog/blogCom::common-head"></header>
+<body class="lay-blog">
+<div th:replace="admin/blog/blogCom::common-header"></div>
+<div class="container-wrap">
+    <div class="container container-message container-details">
+        <div class="contar-wrap">
+            <div class="item" style="background:#f2f2f2 ">
+                <main class="links-list">
+                <th:block th:unless="${#lists.isEmpty(links)}">
+                    <div class="title">
+                        <h3>友链</h3>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <th:block th:each="link : ${links}">
+                                <li><a th:href="@{${link.linkaddress}}"
+                                       th:text="${link.linktitle}">友链</a>
+                                    -
+                                    <th:block th:text="${link.linkdescription}"></th:block>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </th:block>
+                    <th:block th:unless="${#lists.isEmpty(links)}">
+                        <div class="title" style="margin-top: 50px">
+                            <h3>推荐网站</h3>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <th:block th:each="link : ${links}">
+                                    <li><a th:href="@{${link.linkaddress}}" th:text="${link.linktitle}">推荐网站</a>
+                                        -
+                                        <th:block th:text="${link.linkdescription}"></th:block>
+                                    </li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </th:block>
+                    <h2 style="margin-top: 50px;">链接须知</h2>
+                    <p>欢迎互换友链 ^_^ 不过请确定贵站可以正常运营.</p>
+                    <p>我的邮箱是908665908@qq.com, 格式要求如下:
+                    </p>
+                    <ul>
+                        <li>网站名称：ppblog</li>
+                        <li>网站链接：http://ppblog.site</li>
+                        <li>网站描述：pp的个人博客</li>
+                    </ul>
+
+                    <p>请保证自己的链接长期有效,不然可能会被清理.</p>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/blog/blogCom::common-footer"></div>
+<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
+<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script>
+    layui.config({
+        base: '/static/admin/plugins/blog/js/'
+    }).use('blog');
+</script>
+</body>
+</html>
