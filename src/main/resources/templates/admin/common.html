@@ -80,7 +80,7 @@
 <div class="breadcrumb" th:fragment="common-bread">
     <a class="btn orange" th:href="@{/admin/index}"><i class="icon-refresh"></i></a> <a class="btn" th:href="@{/admin/index}">Elements</a>
     <div class="pull-right">
-        <a class="btn btn-info" href="#"><i class="icon-calendar"></i></a> <a class="btn" href="#">13/08/13</a>
+        <a class="btn btn-info" href="#"><i class="icon-calendar"></i></a> <a class="btn" href="#" th:text="${#dates.format(new java.util.Date().getTime(),'yy/MM/dd')}">13/08/13</a>
     </div>
 </div>
 <!--公共foot区域-->
