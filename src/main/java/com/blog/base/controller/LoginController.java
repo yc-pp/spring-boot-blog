@@ -1,7 +1,9 @@
 package com.blog.base.controller;
 
+import com.blog.base.dao.*;
 import com.blog.base.entity.User;
 import com.blog.base.service.impl.LoginServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,24 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Resource
     private LoginServiceImpl loginServiceImpl;
+    @Autowired
+    private ArticleMapper articleMapper;
+    @Autowired
+    private CommentMapper commentMapper;
+    @Autowired
+    private CategoryMapper categoryMapper;
+    @Autowired
+    private TagMapper tagMapper;
+    @Autowired
+    private LinkMapper linkMapper;
 
     @RequestMapping("index")
-    public String toIndex(){
+    public String toIndex(HttpServletRequest request){
+        request.setAttribute("articles",articleMapper.getTotalArticles(null));
+        request.setAttribute("comments",commentMapper.getTotalComments(null));
+        request.setAttribute("categorys",categoryMapper.getTotalCategorys(null));
+        request.setAttribute("tags",tagMapper.getTotalTags(null));
+        request.setAttribute("links",linkMapper.getTotalLinks(null));
         return "admin/index";
     }
 
@@ -33,7 +50,7 @@ public class LoginController {
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("passWord") String passWord,
                         @RequestParam("verifyCode") String verifyCode,
-                        HttpSession session){
+                        HttpSession session,HttpServletRequest request){
         if (StringUtils.isEmpty(verifyCode)) {
             session.setAttribute("errorMsg", "验证码不能为空");
             return "admin/login";
@@ -51,6 +68,11 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("loginNickName", user.getNickname());
             session.setAttribute("loginId", user.getOid());
+            request.setAttribute("artilces",articleMapper.getTotalArticles(null));
+            request.setAttribute("comments",commentMapper.getTotalComments(null));
+            request.setAttribute("categorys",categoryMapper.getTotalCategorys(null));
+            request.setAttribute("tags",tagMapper.getTotalTags(null));
+            request.setAttribute("links",linkMapper.getTotalLinks(null));
             return "admin/index";
         } else {
             session.setAttribute("errorMsg", "登陆失败");
