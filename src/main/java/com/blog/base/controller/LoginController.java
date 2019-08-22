@@ -68,7 +68,7 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("loginNickName", user.getNickname());
             session.setAttribute("loginId", user.getOid());
-            request.setAttribute("artilces",articleMapper.getTotalArticles(null));
+            request.setAttribute("articles",articleMapper.getTotalArticles(null));
             request.setAttribute("comments",commentMapper.getTotalComments(null));
             request.setAttribute("categorys",categoryMapper.getTotalCategorys(null));
             request.setAttribute("tags",tagMapper.getTotalTags(null));
