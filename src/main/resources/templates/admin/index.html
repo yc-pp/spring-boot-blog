@@ -20,7 +20,7 @@
                             <div class="row-fluid">
                                 <div class="quick-button span4 black">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/article/edit}">
                                         <div class="overlay">
                                             <p>写博客</p>
                                         </div>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="quick-button span4 green">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/layered.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/article}">
                                         <div class="overlay">
                                             <p>博客总数</p>
                                             <th:block><p th:text="'（'+${articles}+'）'" style="margin-top: 5%"></p></th:block>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="quick-button span4 orange">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/comment}">
                                         <div class="overlay">
                                             <p>总评论数</p>
                                             <th:block><p th:text="'（'+${comments}+'）'" style="margin-top: 5%"></p></th:block>
@@ -48,7 +48,7 @@
                             <div class="row-fluid">
                                 <div class="quick-button span4 blue">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/category}">
                                         <div class="overlay">
                                             <p>分类数量</p>
                                             <th:block><p th:text="'（'+${categorys}+'）'" style="margin-top: 5%"></p></th:block>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="quick-button span4 pink">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/calendar.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/tag}">
                                         <div class="overlay">
                                             <p>标签总数</p>
                                             <th:block><p th:text="'（'+${tags}+'）'" style="margin-top: 5%"></p></th:block>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="quick-button span4 purple">
                                     <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />
-                                    <a href="#">
+                                    <a th:href="@{/admin/link}">
                                         <div class="overlay">
                                             <p>链接总数</p>
                                             <th:block><p th:text="'（'+${links}+'）'" style="margin-top: 5%"></p></th:block>
