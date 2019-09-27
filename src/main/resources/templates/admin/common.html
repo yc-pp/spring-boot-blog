@@ -7,14 +7,14 @@
     <title>YC blog 博客管理系統</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <!-- Styles -->
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap-responsive.min.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/fontawesome/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/jQueryUI/css/jquery-ui-1.10.0.custom.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/css/styles.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/bootstrap/css/bootstrap-table.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/sweetalert/css/sweetalert.css}">
-    <link rel="stylesheet" th:href="@{~/static/admin/plugins/css/main.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap-responsive.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/fontawesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/jQueryUI/css/jquery-ui-1.10.0.custom.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap-table.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/css/sweetalert.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/css/main.css}">
 </head>
 <!--公共nav区域-->
 <div class="navbar navbar-static-top" th:fragment="common-nav">
@@ -29,7 +29,7 @@
                         <div class="container-fluid">
                             <div class="row-fluid">
                                 <div class="span4">
-                                    <img class="profile" th:src="@{~/static/admin/assets/img/flat_icons/person.png}" alt="">
+                                    <img class="profile" th:src="@{/admin/assets/img/flat_icons/person.png}" alt="">
                                 </div>
                                 <div class="span8 details">
                                     <small>Welcome to YcBlog!</small>
@@ -55,20 +55,20 @@
 <!--公共menu区域-->
 <ul class="menu" th:fragment="common-menu">
     <li>
-        <a th:href="@{/admin/index}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/dashboard.png}" alt="" />首页</span></a>
+        <a th:href="@{/admin/index}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/dashboard.png}" alt="" />首页</span></a>
     </li>
     <li>
-        <a th:href="@{/admin/article/edit}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />写博客</span></a>
+        <a th:href="@{/admin/article/edit}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/edit.png}" alt="" />写博客</span></a>
     </li>
     <li>
-        <a th:href="@{/admin/article}"><span><img class="img-icon"  th:src="@{~/static/admin/assets/img/flat_icons/layered.png}"alt="" />博客管理</span></a>
+        <a th:href="@{/admin/article}"><span><img class="img-icon"  th:src="@{/admin/assets/img/flat_icons/layered.png}"alt="" />博客管理</span></a>
     </li>
-    <li><a th:href="@{/admin/comment}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />评论管理</span></a></li>
-    <li><a th:href="@{/admin/category}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />分类管理</span></a></li>
-    <li><a th:href="@{/admin/tag}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/calendar.png}" alt="" />标签管理</span></a></li>
-    <li><a th:href="@{/admin/link}"><span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />友情链接</span></a></li>
+    <li><a th:href="@{/admin/comment}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/message.png}" alt="" />评论管理</span></a></li>
+    <li><a th:href="@{/admin/category}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/shelf.png}" alt="" />分类管理</span></a></li>
+    <li><a th:href="@{/admin/tag}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/calendar.png}" alt="" />标签管理</span></a></li>
+    <li><a th:href="@{/admin/link}"><span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/chat.png}" alt="" />友情链接</span></a></li>
     <li>
-        <span><img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/sheild.png}" alt="" />系统管理<i class="icon-angle-down"></i></span>
+        <span><img class="img-icon" th:src="@{/admin/assets/img/flat_icons/sheild.png}" alt="" />系统管理<i class="icon-angle-down"></i></span>
         <ul>
             <li><a th:href="@{/admin/config}">系统配置</a></li>
             <li><a th:href="@{/admin/changePwd}">密码修改</a></li>

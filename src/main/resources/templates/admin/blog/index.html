@@ -15,7 +15,7 @@
                         <div class="item-box  layer-photos-demo2 layer-photos-demo">
                             <div class="blog-flex-center">
                                 <div class="blog-flex0">
-                                    <img th:src="@{~/static/admin/plugins/blog/img/person.png}" alt="" class="link avatar avatar-image">
+                                    <img th:src="@{/admin/plugins/blog/img/person.png}" alt="" class="link avatar avatar-image">
                                 </div>
                                 <div class="author-lockup blog-flex1">
                                     <a class="link" href="javascript:;" th:text="${name}">登录名</a>
@@ -33,7 +33,7 @@
                                 <th:block th:utext="${#strings.abbreviate(blog.articlecontent,150)}">
                                 </th:block>
                             </p>
-                            <img th:src="@{~/static/admin/plugins/blog/img/item.png}" alt="">
+                            <img th:src="@{/admin/plugins/blog/img/item.png}" alt="">
                         </div>
                         <div class="comment count">
                             <a  th:href="@{'/admin/blog/article/'+${blog.oid}}" th:text="'评论（'+${blog.articlecommentcount}+'）'">评论</a>
@@ -129,8 +129,8 @@
     </div>
 </div>
 <div th:replace="admin/blog/blogCom::common-footer"></div>
-<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
-<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/blog/js/layui.js}"></script>
+<script th:src="@{/admin/plugins/jquery/js/jquery.min.js}"></script>
 <script>
     layui.config({
         base: '/static/admin/plugins/blog/js/'

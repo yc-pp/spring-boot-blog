@@ -56,11 +56,11 @@
     </div>
 </div>
 <div th:replace="admin/blog/blogCom::common-footer"></div>
-<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
-<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/blog/js/layui.js}"></script>
+<script th:src="@{/admin/plugins/jquery/js/jquery.min.js}"></script>
 <script>
     layui.config({
-        base: '/static/admin/plugins/blog/js/'
+        base: '/admin/plugins/blog/js/'
     }).use('blog');
 </script>
 </body>

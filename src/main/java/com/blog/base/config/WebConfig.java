@@ -12,13 +12,13 @@ public class WebConfig implements WebMvcConfigurer{
     private LoginInterceptor loginInterceptor;
     //addPathPatterns("/**")拦截所有的请求
     //excludePathPatterns("/login", "/register")除去登录和注册请求
-    @Override
+
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/login", "/admin/register",
                 "/admin/common/kaptcha").excludePathPatterns("/admin/plugins/**").excludePathPatterns("/admin/assets/**");
     }
     //配置静态资源的，比如html，js，css，等等
-    @Override
+
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/")

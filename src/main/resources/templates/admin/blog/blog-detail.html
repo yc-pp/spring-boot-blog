@@ -22,7 +22,7 @@
                     </h5>
                     <h5>发布于：<span th:text="${#dates.format(blogVO.articlecreated,'yyyy-MM-dd HH:mm:ss')}">发布时间</span></h5>
                     <p><th:block th:utext="${blogVO.articlecontent}"/></p>
-                    <img src="../res/static/images/item.png" alt="">
+                    <img th:src="@{/admin/plugins/blog/img/item.png}" alt="">
                     <div class="count layui-clear">
                         <span class="pull-left">阅读 <em><th:block th:text="${blogVO.articleviewcount}"></th:block></em></span>
                         <span class="pull-right ">评论 <em><th:block th:text="${blogVO.articlecommentcount}"></th:block></em></span>
@@ -42,7 +42,7 @@
                 <th:block th:unless="${#lists.isEmpty(blogVO.comments)}">
                     <th:block th:each="comment : ${blogVO.comments}">
                         <div class="info-item">
-                            <img class="info-img" th:src="@{~/static/admin/plugins/blog/img/person.png}" alt="">
+                            <img class="info-img" th:src="@{/admin/plugins/blog/img/person.png}" alt="">
                             <div class="info-text">
                                 <p class="title count">
                                     <span class="name"><th:block th:text="${name}"></th:block></span>
@@ -58,11 +58,11 @@
     </div>
 </div>
 <div th:replace="admin/blog/blogCom::common-footer"></div>
-<script th:src="@{~/static/admin/plugins/blog/js/layui.js}"></script>
-<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/blog/js/layui.js}"></script>
+<script th:src="@{/admin/plugins/jquery/js/jquery.min.js}"></script>
 <script>
     layui.config({
-        base: '/static/admin/plugins/blog/js/'
+        base: '/admin/plugins/blog/js/'
     }).use('blog');
 </script>
 </body>

@@ -19,7 +19,7 @@
                         <div class="well-content">
                             <div class="row-fluid">
                                 <div class="quick-button span4 black">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/edit.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/edit.png}" alt="" />
                                     <a th:href="@{/admin/article/edit}">
                                         <div class="overlay">
                                             <p>写博客</p>
@@ -27,7 +27,7 @@
                                     </a>
                                 </div>
                                 <div class="quick-button span4 green">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/layered.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/layered.png}" alt="" />
                                     <a th:href="@{/admin/article}">
                                         <div class="overlay">
                                             <p>博客总数</p>
@@ -36,7 +36,7 @@
                                     </a>
                                 </div>
                                 <div class="quick-button span4 orange">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/message.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/message.png}" alt="" />
                                     <a th:href="@{/admin/comment}">
                                         <div class="overlay">
                                             <p>总评论数</p>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="row-fluid">
                                 <div class="quick-button span4 blue">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/shelf.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/shelf.png}" alt="" />
                                     <a th:href="@{/admin/category}">
                                         <div class="overlay">
                                             <p>分类数量</p>
@@ -56,7 +56,7 @@
                                     </a>
                                 </div>
                                 <div class="quick-button span4 pink">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/calendar.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/calendar.png}" alt="" />
                                     <a th:href="@{/admin/tag}">
                                         <div class="overlay">
                                             <p>标签总数</p>
@@ -65,7 +65,7 @@
                                     </a>
                                 </div>
                                 <div class="quick-button span4 purple">
-                                    <img class="img-icon" th:src="@{~/static/admin/assets/img/flat_icons/chat.png}" alt="" />
+                                    <img class="img-icon" th:src="@{/admin/assets/img/flat_icons/chat.png}" alt="" />
                                     <a th:href="@{/admin/link}">
                                         <div class="overlay">
                                             <p>链接总数</p>
@@ -83,9 +83,9 @@
     <!--foot脚区域-->
     <div th:replace="admin/common::common-foot"></div>
 </div>
-<script th:src="@{~/static/admin/plugins/jquery/js/jquery.min.js}"></script>
-<script th:src="@{~/static/admin/plugins/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{~/static/admin/plugins/jQueryUI/js/jquery-ui-1.9.2.custom.min.js}"></script>
-<script th:src="@{~/static/admin/plugins/js/menu.js}"></script>
+<script th:src="@{/admin/plugins/jquery/js/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/admin/plugins/jQueryUI/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/admin/plugins/js/menu.js}"></script>
 </body>
 </html>
