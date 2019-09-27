@@ -80,6 +80,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>spring-boot-blog-1.0.0-SNAPSHOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
