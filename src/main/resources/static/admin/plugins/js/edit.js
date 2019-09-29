@@ -5,7 +5,7 @@ $(function () {
         width: "100%",
         height: 640,
         syncScrolling: "single",
-        path: "/static/admin/plugins/editormd/lib/",
+        path: "/admin/plugins/editormd/lib/",
         toolbarModes: 'full',
         /**图片上传配置*/
         imageUpload: true,

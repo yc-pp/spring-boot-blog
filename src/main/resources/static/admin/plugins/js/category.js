@@ -2,7 +2,7 @@ $(function () {
 
     var t = $("#table_tagList").bootstrapTable({
         toolbar: '#toolbar',
-        url: 'admin/category/list',
+        url: '/admin/category/list',
         method: 'get',
         dataType: "json",
         striped: true,//设置为 true 会有隔行变色效果
@@ -97,7 +97,7 @@ function edit(oid) {
     document.getElementById("categoryForm").reset();
     $.ajax({
         type: 'POST',//方法类型
-        url: 'admin/category/detail',
+        url: '/admin/category/detail',
         data: {"oid": oid},
         success: function (result) {
             if(result.resultCode =='000000' && result.data != null){
@@ -131,7 +131,7 @@ function del(oid) {
         if(inputValue) {
             $.ajax({
                 type: 'POST',//方法类型
-                url: 'admin/category/del',
+                url: '/admin/category/del',
                 data: {"oid": oid},
                 success: function (result) {
                     if(result.resultCode =='000000'){
@@ -167,9 +167,9 @@ $('#saveButton').click(function () {
     }
     var params = $("#categoryForm").serialize();
     var categoryOid=$("#categoryOid").val();
-    var url='admin/category/save';
+    var url='/admin/category/save';
     if(categoryOid != null && categoryOid > 0){
-        url='admin/category/update';
+        url='/admin/category/update';
     }
     $.ajax({
         type: 'POST',//方法类型

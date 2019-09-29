@@ -19,10 +19,10 @@ public class WebConfig implements WebMvcConfigurer{
     }
     //配置静态资源的，比如html，js，css，等等
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+/*    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/")
         //.setCacheControl(CacheControl.maxAge(1, TimeUnit.HOURS).cachePublic())
         ;
-    }
+    }*/
 }
