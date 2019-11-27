@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>YC blog</title>
-    <!--登录页面样式-->
-    <link rel="stylesheet" th:href="@{/admin/plugins/vector/style.css}">
+	<meta charset="UTF-8">
+	<title>YC blog</title>
+	<link rel="stylesheet" th:href="@{/admin/plugins/css/login/login.css}">
+	<link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/css/sweetalert.css}">
 </head>
 <body>
-
-<div id="container">
-    <div id="output">
-        <div class="containerT">
-            <h1>用户登录</h1>
-            <form class="form" id="entry_form" th:action="@{/admin/login}" method="post">
-                <input type="text" placeholder="请输入账号" name="userName" required="true">
-                <input type="password" placeholder="请输入密码" name="passWord" required="true">
-                <input type="text" name="verifyCode" placeholder="请输入验证码" required="true">
-                        <img alt="单击图片刷新！" style="vertical-align:top" th:src="@{/admin/common/kaptcha}"
-                             onclick="this.src='/admin/common/kaptcha?d='+new Date()*1">
-                <button type="submit" id="entry_btn">登录</button>
-                <div th:if="${not #strings.isEmpty(session.errorMsg)}" >
-                    <div style="font-size: 40px;color: #000;" th:text="${session.errorMsg}"></div>
-                </div>
-            </form>
-        </div>
-    </div>
+<input type="hidden" id="imglist" th:value="${imglist}">
+<div class="logo-box">
+	<div class="login" style="">
+<!--		<div class="bxs-row" style="text-align:center;">
+			<img id="logo" src="images/logo.jpg" style="width:72px;"><span class="tips" style="color:red;">忍住不哭来段口技</span>
+		</div>-->
+		<div class="bxs-row" style="text-align:center;">
+			<span class="tips">用户登录</span>
+		</div>
+		<div class="bxs-row">
+			<input type="text" class="username" placeholder="用户名" value="admin">
+			<p class=" err err-username"></p>
+		</div>
+		<div class="bxs-row">
+			<input type="password" class="password" placeholder="密码">
+			<p class="err err-password"></p>
+		</div>
+		<div class="bxs-row">
+			<input type="submit" class="submit btn" value="登录">
+		</div>
+	</div>
+	<div class="verBox">
+		<div id="imgVer" style="display:inline-block;"></div>
+	</div>
 </div>
 <script th:src="@{/admin/plugins/jquery/js/jquery.min.js}"></script>
-<!--登录页面背景图片制作js-->
-<script th:src="@{/admin/plugins/vector/vector.js}"></script>
-<script type="text/javascript">
-    $(function(){
-        Victor("container", "output");   //登录背景函数
-        $("#entry_name").focus();
-    });
-</script>
+<script th:src="@{/admin/plugins/js/login/login.js}"></script>
+<script th:src="@{/admin/plugins/js/login/sliderImg.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/js/sweetalert.min.js}"></script>
 </body>
 </html>
